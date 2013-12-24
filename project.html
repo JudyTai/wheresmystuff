@@ -2,7 +2,7 @@
 <head>
 <meta charset="utf-8">
 <link rel="shortcut icon" href="">
-<link href="./project.css" rel="stylesheet">
+<link href="./style.css" rel="stylesheet">
     <!-- Bootstrap core CSS -->
 
 
@@ -10,385 +10,88 @@
 <!-- Add jQuery library -->
 
 	<script type="text/javascript" src="../lib/jquery-1.10.1.min.js"></script>
-
-
-
 	<!-- Add mousewheel plugin (this is optional) -->
 
 	<script type="text/javascript" src="../lib/jquery.mousewheel-3.0.6.pack.js"></script>
-
-
-
 	<!-- Add fancyBox main JS and CSS files -->
 
 	<script type="text/javascript" src="../source/jquery.fancybox.js?v=2.1.5"></script>
 
 	<link rel="stylesheet" type="text/css" href="../source/jquery.fancybox.css?v=2.1.5" media="screen" />
-
-
-
 	<!-- Add Button helper (this is optional) -->
 
 	<link rel="stylesheet" type="text/css" href="../source/helpers/jquery.fancybox-buttons.css?v=1.0.5" />
 
 	<script type="text/javascript" src="../source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
-
-
-
 	<!-- Add Thumbnail helper (this is optional) -->
 
 	<link rel="stylesheet" type="text/css" href="../source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" />
 
 	<script type="text/javascript" src="../source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
-
-
-
 	<!-- Add Media helper (this is optional) -->
 
 	<script type="text/javascript" src="../source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
 
-
-
 	<script type="text/javascript">
+			$('map > area.fancybox').click(function(e) {
+
+        e.preventDefault();
+
+        var url = $(this).attr('href');
+
+        var title = $(this).attr('title');
+
+        var type = $(this).attr('rel');
+
+  	      $.fancybox({
+
+  		          'title': title,
+
+           		 'titlePosition': 'inside',
+
+       		     'href' : url,
+
+           		 'type' : type
+
+      		  });
+
+		    });
+
 
 		$(document).ready(function() {
 			$('.fancybox').fancybox();
 				
-		$("#single_1").fancybox({
-          helpers: {
+			$("#single_1").fancybox({
+         		 helpers: {
+    		          title : {
+                 		 type : 'float'
+              			}	
+          			}
+      			});
+			$(".various").fancybox({
 
-              title : {
+		maxWidth	: 800,
 
-                  type : 'float'
+		maxHeight	: 600,
 
-              }
+		fitToView	: false,
 
-          }
+		width		: '70%',
 
-      });
-    $("#single_2").fancybox({
+		height		: '70%',
 
-    	openEffect	: 'elastic',
+		autoSize	: false,
 
-    	closeEffect	: 'elastic',
+		closeClick	: false,
 
+		openEffect	: 'none',
 
+		closeEffect	: 'none'
 
-    	helpers : {
-
-    		title : {
-
-    			type : 'inside'
-
-    		}
-
-    	}
-
-    });
-
-
-
-    $("#single_3").fancybox({
-
-    	openEffect : 'none',
-
-    	closeEffect	: 'none',
-
-    	helpers : {
-
-    		title : {
-
-    			type : 'outside'
-
-    		}
-
-    	}
-
-    });
-
-
-
-    $("#single_4").fancybox({
-
-    	helpers : {
-
-    		title : {
-
-    			type : 'over'
-    		}
-    	}
-    });
-			$(".fancybox-effects-a").fancybox({
-
-				helpers: {
-
-					title : {
-
-						type : 'outside'
-
-					},
-
-					overlay : {
-
-						speedOut : 0
-
-					}
-
-				}
-
-			});
-
-			$(".fancybox-effects-b").fancybox({
-
-				openEffect  : 'none',
-
-				closeEffect	: 'none',
-
-
-
-				helpers : {
-
-					title : {
-
-						type : 'over'
-
-					}
-
-				}
-
-			});
-
-			$(".fancybox-effects-c").fancybox({
-
-				wrapCSS    : 'fancybox-custom',
-
-				closeClick : true,
-
-
-
-				openEffect : 'none',
-
-
-
-				helpers : {
-
-					title : {
-
-						type : 'inside'
-
-					},
-
-					overlay : {
-
-						css : {
-
-							'background' : 'rgba(238,238,238,0.85)'
-
-						}
-
-					}
-
-				}
-
-			});
-
-			$(".fancybox-effects-d").fancybox({
-
-				padding: 0,
-
-
-
-				openEffect : 'elastic',
-
-				openSpeed  : 150,
-
-
-
-				closeEffect : 'elastic',
-
-				closeSpeed  : 150,
-
-
-
-				closeClick : true,
-
-
-
-				helpers : {
-
-					overlay : null
-
-				}
-
-			});
-
-			$('.fancybox-buttons').fancybox({
-
-				openEffect  : 'none',
-
-				closeEffect : 'none',
-
-
-
-				prevEffect : 'none',
-
-				nextEffect : 'none',
-
-
-
-				closeBtn  : false,
-
-
-
-				helpers : {
-
-					title : {
-
-						type : 'inside'
-
-					},
-
-					buttons	: {}
-
-				},
-
-
-
-				afterLoad : function() {
-
-					this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
-
-				}
-
-			});
-
-			$('.fancybox-thumbs').fancybox({
-
-				prevEffect : 'none',
-
-				nextEffect : 'none',
-
-
-
-				closeBtn  : false,
-
-				arrows    : false,
-
-				nextClick : true,
-
-
-
-				helpers : {
-
-					thumbs : {
-
-						width  : 50,
-
-						height : 50
-
-					}
-
-				}
-
-			});
-			$('.fancybox-media')
-
-				.attr('rel', 'media-gallery')
-
-				.fancybox({
-
-					openEffect : 'none',
-
-					closeEffect : 'none',
-
-					prevEffect : 'none',
-
-					nextEffect : 'none',
-
-
-
-					arrows : false,
-
-					helpers : {
-
-						media : {},
-
-						buttons : {}
-
-					}
-
-				});
-
-
-
-
-
-			$("#fancybox-manual-a").click(function() {
-
-				$.fancybox.open('1_b.jpg');
-
-			});
-
-
-
-			$("#fancybox-manual-b").click(function() {
-
-				$.fancybox.open({
-
-					href : 'iframe.html',
-
-					type : 'iframe',
-
-					padding : 5
-
-				});
-
-			});
-
-
-
-			$("#fancybox-manual-c").click(function() {
-
-				$.fancybox.open([
-
-					{
-
-						href : '1_b.jpg',
-
-						title : 'My title'
-
-					}, {
-
-						href : '2_b.jpg',
-
-						title : '2nd title'
-
-					}, {
-
-						href : '3_b.jpg'
-
-					}
-
-				], {
-
-					helpers : {
-
-						thumbs : {
-
-							width: 75,
-
-							height: 50
-
-						}
-
-					}
-
-				});
-
-			});
-
-		});
+	});
+	});
 	</script>
+
 	<style type="text/css">
 
 		.fancybox-custom .fancybox-skin {
@@ -405,6 +108,36 @@
 <title> Where's my Stuff?</title>
 </head>
 <body align="center">
+<script src="./our_secret.js"></script>	 
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css">
+   <script>
+
+    window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+        appId      : FacebookAppId,                        // App ID from the app dashboard
+        cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+        status     : true,                                 // Check Facebook Login status
+        xfbml      : true                                  // Look for social plugins on the page
+        });
+
+        // Additional initialization code such as adding Event Listeners goes here
+        window.fbLoaded();
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        //js.src = "//connect.facebook.net/en_US/all.js";
+        // Debug version of Facebook JS SDK
+        js.src = "//connect.facebook.net/en_US/all/debug.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
 	<script>
 		function changetolost(){
 		var map=document.getElementById("NccuMap");
@@ -450,21 +183,9 @@
 	</div>
 	<div class="navbar-collapse collapse">
           <form class="navbar-form navbar-right" role="form">
-
-            <div class="form-group">
-
-              <input type="text" placeholder="Email" class="form-control">
-
-            </div>
-
-            <div class="form-group">
-
-              <input type="password" placeholder="Password" class="form-control">
-
-            </div>
-
-            <button type="submit" class="btn btn-success">Sign in</button>
-
+            <button  id="my-login-button" class="btn btn-primary">Login with Facebook</button>
+		<a id="my-login-message"></a>
+	
           </form>
 
         </div> 
@@ -481,25 +202,16 @@
 	<button type="button" class="btn btn btn-primary" onclick= "changetolost()">lost</button>
         <button type="button" class="btn btn btn-danger"  onclick= "changetofound()" >found</button>	
 	</p>
-	<img id="NccuMap" src="./picture/background.jpg" width="1024" height="678" usemap="#NCCU" />  
- 	<map name="NCCU">
-	  <area shape="rect" coords="0,0,82,126" alt="Sun" href="">
-	  <area shape="circle" coords="90,58,3" alt="Mercury" href="">
+	<a class="various fancybox.iframe">
+	<img id="NccuMap" src="./picture/nccumap.jpg" width="1024" height="678" usemap="#NCCU" />  
+ 	<map name="NCCU" id="Map">
+	  <area shape="rect" coords="0,0,82,126" class="fancybox.iframe various"href="http://ghost.cs.nccu.edu.tw/~s10006/" rel="iframe"> 
+	  <area shape="rect" coords="200,200,400,400" alt="Mercury" href="">
 	  <area shape="circle" coords="124,58,8" alt="Venus" href="">
-	</map> 
- 	 </div>
-		
-	<a class="fancybox" href="#test1">  
-	<button type="button" class= "btn btn-primary" >test</button>	 
-	<a/>
-	<div id="test1" style="display:none;">
-	What does the fox say?
-	</div>
-	
-
+      	</map> 
+  	 </div>	
 </div>
 	
-
     <div id="footer">
 
       <div class="container">
@@ -510,6 +222,47 @@
 
     </div>
 	<script src="./dist/js/bootstrap.min.js"></script>
+<!-- BLOCK: Your script playground -->
+    <script id="my-script-playground">
+        window.fbLoaded = function(){
+            // define the events when login status changed.
+
+            FB.Event.subscribe('auth.login', function(response) {
+
+                // when user has been logged in, this block will be triggered.
+                var msg = "You're logged in.";
+                $("#my-login-message").html(msg);
+                console.log("Your login response:");
+                console.log(response);
+                // fetch the profile
+                fetch_my_profile();
+            });
+            // define the action when user clicked the login button.
+
+            $("#my-login-button").click(function(){
+                FB.login();
+            });
+            var fetch_my_profile = function () {
+   
+                FB.api('/me', function(response) {
+                    var my_name = response.name;
+                    var my_gender = response.gender;
+                    var my_username = response.username;
+                    var my_facebook_id = response.id;
+                    $("#my-profile-name").html(my_name);
+                    $("#my-profile-gender").html(my_gender);
+                    $("#my-profile-username").html(my_username);
+                    $("#my-profile-facebook-id").html(my_facebook_id);
+                });
+                FB.api('/me/picture?width=250', function(response) {
+                    var my_picture_url = response.data.url;
+                
+                    $("#my-profile-picture").attr('src', my_picture_url);
+                });
+            };
+        };
+    </script>
+<!-- EndBlock-->
 </body>
 </html>
 
