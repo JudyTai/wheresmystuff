@@ -8,6 +8,7 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./dist/js/rowlink.js"></script>
 
 <script>
 	var whichList=localStorage.getItem("whichList");
@@ -24,6 +25,13 @@
 	}
 </script>
 
+<script type="text/javascript">
+$(document).ready(function() {
+	$(".clickableRow").click(function() {
+		window.document.location = $(this).attr("href");
+      	});
+});
+</script>
 <body onload="changeBuilding(); changeList()">
 <div class="panel panel-default">
         <!-- Default panel contents -->
@@ -32,22 +40,22 @@
 		<img id="buildingImg" width="100" height="100" alt="error"/>
 	</div>
         <div class="panel-body">
-                <p id="listTitle">All the lost/found/lostfound items in XXX building are listed down below</p>
+                <p id="listTitle">Lost</p>
         </div>
         <!-- Table -->
-        <table class="table">
+        <table class="table table-hover">
                 <thead>
                         <tr>
                                 <th>#</th>
-                                <th>Lost/Found Item</th>
+                                <th>Item name</th>
                                 <th>Specific spot</th>
                         </tr>
                 </thead>
 
                 <tbody>
-                        <tr>
+                        <tr class="clickableRow" href="./item.html" style="cursor:pointer">
                                 <td>1</td>
-                                <td>Bootle</td>
+                                <td>Bottle</td>
                                 <td>101</td>
                         </tr>
                         <tr>
@@ -63,6 +71,7 @@
                 </tbody>
         </table>
 </div>
+
 
 </body>
 </html>
