@@ -17,11 +17,11 @@
 		var buildingImg=document.getElementById('buildingImg');
 		var buildingTitle=document.getElementById('buildingTitle');
 		buildingImg.src="./picture/" + whichBuilding + ".jpg";
-		buildingTitle.innerHTML=whichBuilding;
+		buildingTitle.innerHTML=whichBuilding + " Building";
 	}
 	function changeList(){
 		var list=document.getElementById('listTitle');
-		list.innerHTML=whichList;
+		list.innerHTML=whichList+" item";
 	}
 </script>
 
@@ -39,15 +39,12 @@ $(document).ready(function() {
 		<h2 id="buildingTitle"></h2>
 		<img id="buildingImg" width="100" height="100" alt="error"/>
 	</div>
-        <div class="panel-body">
-                <p id="listTitle">Lost</p>
-        </div>
         <!-- Table -->
         <table class="table table-hover">
                 <thead>
                         <tr>
                                 <th>#</th>
-                                <th>Item name</th>
+                                <th id="listTitle">Item name</th>
                                 <th>Specific spot</th>
                         </tr>
                 </thead>
