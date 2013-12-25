@@ -1,13 +1,13 @@
 <html>
 <head></head>
-<script type="text/javascript" src="./lib/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
+
 <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="./control.js"></script>
 
 <script>
 	var whichList=localStorage.getItem("whichList");
@@ -19,7 +19,7 @@
 		buildingTitle.innerHTML=whichBuilding;
 	}
 	function changeList(){
-		var list=document.getElementById('List');
+		var list=document.getElementById('listTitle');
 		list.innerHTML=whichList;
 	}
 </script>
@@ -32,7 +32,7 @@
 		<img id="buildingImg" width="100" height="100" alt="error"/>
 	</div>
         <div class="panel-body">
-                <p id="List">All the lost/found/lostfound items in XXX building are listed down below</p>
+                <p id="listTitle">All the lost/found/lostfound items in XXX building are listed down below</p>
         </div>
         <!-- Table -->
         <table class="table">
@@ -65,18 +65,4 @@
 </div>
 
 </body>
-<script>
-$(document).ready(function(){
-	function changeBuilding(){
-		var building=document.getElementById('Building');
-		building.src="./picture/background";
-	}
-	function changeList(){
-		var list=document.getElementById('List');
-		//if (whichList==1){
-			list.innerHTML='Success';
-		//}
-	}
-})
-</script>
 </html>

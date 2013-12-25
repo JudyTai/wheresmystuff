@@ -7,7 +7,8 @@
 <!-- Bootstrap core CSS -->
 <link href="./dist/css/bootstrap.css" rel="stylesheet">
 <!-- Add jQuery library -->
-<script type="text/javascript" src="./lib/jquery-1.10.1.min.js"></script>
+<!script type="text/javascript" src="./lib/jquery-1.10.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
 <!-- Add mousewheel plugin (this is optional) -->
 <script type="text/javascript" src="./lib/jquery.mousewheel-3.0.6.pack.js"></script>
 <!-- Add fancyBox main JS and CSS files -->
@@ -25,21 +26,26 @@
 
 <script type="text/javascript">
 
-$('map > area.fancybox').click(function(e) {
-	changeBuilding('nccumap');
-	e.preventDefault();
-        var url = $(this).attr('href');
-        var title = $(this).attr('title');
-        var type = $(this).attr('rel');
-       	$.fancybox({
-  		'title': title,
-          	'titlePosition': 'inside',
-       	     	'href' : url,
-           	'type' : type
-      	});
-});
 
 $(document).ready(function() {
+	/*Default: lost list*/
+	changeList("Lost");
+	$('map > area.fancybox').click(function(e) {
+		changeBuilding("ZhongYuan");
+		//localStorage.setItem("whichBuilding","background");
+		//alert("welcome");
+		e.preventDefault();
+        	var url = $(this).attr('href');
+        	var title = $(this).attr('title');
+        	var type = $(this).attr('rel');
+       		$.fancybox({
+  			'title': title,
+          		'titlePosition': 'inside',
+       	     		'href' : url,
+           		'type' : type
+      		});
+	});
+
 	$('.fancybox').fancybox();
 	$("#single_1").fancybox({
         	helpers: {
@@ -62,7 +68,6 @@ $(document).ready(function() {
 	});
 });
 </script>
-
 
 <style type="text/css">
 	.fancybox-custom .fancybox-skin {
@@ -159,14 +164,14 @@ $(document).ready(function() {
 			<button type="button" class="btn btn btn-primary" onclick= "changetolost();changeList('Lost')">lost</button>
         		<button type="button" class="btn btn btn-danger"  onclick= "changetofound();changeList('Found')" >found</button>	
 		</p>
-		<a class="various fancybox.iframe">
+		<!a class="various fancybox.iframe">
 			<img id="NccuMap" src="./picture/nccumap.jpg" width="1024" height="678" usemap="#NCCU" />  
  			<map name="NCCU" id="map">
-	  			<area shape="rect" coords="0,0,82,126" class="fancybox" href="./list.html" rel="iframe"/>
+	  			<area shape="rect" coords="0,0,82,126" class="fancybox" href="./list.html" rel="iframe" />
 	  			<!area shape="rect" coords="200,200,400,400" alt="Mercury" href=""/>
 	 			<!area shape="circle" coords="124,58,8" alt="Venus" href=""/>
       			</map>
-		</a>
+		<!/a>
 	</div>
 </div>
 	
