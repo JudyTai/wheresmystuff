@@ -6,21 +6,24 @@
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
 <!-- Optional theme -->
 <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
-<link rel="stylesheet" href="./image.css">
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 <script>
+	function changeList(){
+		var list=document.getElementById('listTitle');
+		list.innerHTML=whichList+" item";
+	}
 </script>
 
-<body>
+<body onload="changeList()">
 <div class="container">
       	<div class="page-header">
-        	<h2><strong>Lost item #</strong></h2>
+        	<h2 id=listTitle>Lost item</h2>
       	</div>
 	<div class="column-fluid">
         	<div class="col-xs-6 col-md-6">
-			<img class="img-responsive" id="itemImg" src="./picture/nccumap.jpg" width="200" height="200" alt="error"/>
+			<img class="img-responsive" id="itemImg" src="./picture/bottle.jpg" width="200" height="200" alt="error"/>
         	</div>
 
         	<div class="col-xs-6 col-md-6">
