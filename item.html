@@ -10,6 +10,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 
 <script>
+	var whichList=localStorage.getItem("whichList");
 	function changeList(){
 		var list=document.getElementById('listTitle');
 		list.innerHTML=whichList+" item";
@@ -19,7 +20,7 @@
 <body onload="changeList()">
 <div class="container">
       	<div class="page-header">
-        	<h2 id=listTitle>Lost item</h2>
+        	<h2 id="listTitle">Lost item</h2>
       	</div>
 	<div class="column-fluid">
         	<div class="col-xs-6 col-md-6">
