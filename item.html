@@ -1,4 +1,7 @@
-<html>
+<!DOCTYPE html>
+
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
 <head></head>
 
 <script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
@@ -11,35 +14,49 @@
 
 <script>
 	var whichList=localStorage.getItem("whichList");
-	function changeList(){
+	var whichItem=localStorage.getItem("whichItem");
+	function changeItemTitle(){
 		var list=document.getElementById('listTitle');
-		list.innerHTML=whichList+" item";
+		if (whichList!=null)
+			list.innerHTML=whichList+" item";
+	}
+	function changeItem(){
+		var itemImg=document.getElementById('itemImg');
+		var itemData=document.getElementById('itemData');
+		if (whichItem=="Bottle"){
+			itemImg.src="./picture/" + whichItem + ".jpg";
+			itemData.innerHTML="<p><font size='+1'><strong>Item name:</strong> Bottle<br><strong>Detailed lost area:</strong> Room301<br><strong>Detailed description:</strong></font><br></p><div class='panel panel-default'><div class='panel-body'><p>It's a blue bottle<br>It's my favorite please help me find it</p>	</div></div>"
+		}
+		else if (whichItem=="Cellphone"){
+			itemImg.src="./picture/" + whichItem + ".jpg";
+			itemData.innerHTML="<p><font size='+1'><strong>Item name:</strong> Cell phone<br><strong>Detailed lost area:</strong> Room301<br><strong>Detailed description:</strong></font><br></p><div class='panel panel-default'><div class='panel-body'><p>It's a blue bottle<br>It's my favorite please help me find it</p>	</div></div>"
+		}
 	}
 </script>
-
-<body onload="changeList()">
+<body onload="changeItemTitle(); changeItem()">
 <div class="container">
       	<div class="page-header">
         	<h2 id="listTitle">Lost item</h2>
-      	</div>
+	</div>
 	<div class="column-fluid">
-        	<div class="col-xs-6 col-md-6">
-			<img class="img-responsive" id="itemImg" src="./picture/bottle.jpg" width="200" height="200" alt="error"/>
+		<div class="col-xs-6 col-md-6">
+			<img class="img-responsive" id="itemImg" src="./picture/bottle.jpg" width="200" height="200" alt="error"/></br>
+			<button type="button" class="btn btn btn-primary" onclick= "alert('notification to XXX is sent')" >I've got this!</button>
         	</div>
-
-        	<div class="col-xs-6 col-md-6">
-          		<p><font size="+1"><strong>Item name:</strong><!/font> bottle<br>
-			<!font size="+1"><strong>Detailed lost area:</strong><!/font> room301<br>
-			<!font size="+1"><strong>Detailed description:</strong></font><br></p>
+        	<div class="col-xs-6 col-md-6" id="itemData">
+			<p><font size="+1"><strong>Item name:</strong> Bottle<br>
+			<strong>Detailed lost area:</strong> Room301<br>
+			<strong>Detailed description:</strong></font><br></p>
 			<div class="panel panel-default">
 				<div class="panel-body">
 					<p>It's a blue bottle<br>
 					It's my favorite please help me find it</p>
 				</div>
 			</div>
-       		</div>
+		</div>
 	</div>
-</div> <!-- /container -->
+</div>
+<!-- /container -->
 
 </body>
 </html>

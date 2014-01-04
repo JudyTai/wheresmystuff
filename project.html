@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 <link rel="shortcut icon" href="">
-<link href="./style.css" rel="stylesheet">
 <!--script type="text/javascript" src="./control.js"></script-->
 <!-- Add jQuery library -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
@@ -50,8 +49,6 @@ $('map > area.fancybox').click(function(e) {
 });
 
 $(document).ready(function() {
-	/*Default: lost list*/
-	changeList("Lost");
 	$('.fancybox').fancybox();
 	$("#single_1").fancybox({
 		helpers: {
@@ -91,68 +88,30 @@ $(document).ready(function() {
 
 <body align="center">
 <script src="./our_secret.js"></script>         
-
-   <script>
-
-
-
-    window.fbAsyncInit = function() {
-
-        // init the FB JS SDK
-
-        FB.init({
-
-        appId      : FacebookAppId,                        // App ID from the app dashboard
-
-        cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
-
-        status     : true,                                 // Check Facebook Login status
-
-        xfbml      : true                                  // Look for social plugins on the page
-
-        });
-
-
-
-        // Additional initialization code such as adding Event Listeners goes here
-
-        window.fbLoaded();
-
-    };
-
-
-
-    // Load the SDK asynchronously
-
-    (function(d, s, id){
-
-        var js, fjs = d.getElementsByTagName(s)[0];
-
-        if (d.getElementById(id)) {return;}
-
-        js = d.createElement(s); js.id = id;
-
-        //js.src = "//connect.facebook.net/en_US/all.js";
-
-        // Debug version of Facebook JS SDK
-
-        js.src = "//connect.facebook.net/en_US/all/debug.js";
-
-        fjs.parentNode.insertBefore(js, fjs);
-
-    }(document, 'script', 'facebook-jssdk'));
-
-    </script>
-
 <script>
-	function changetolost(){
-		var map=document.getElementById("NccuMap");
-                map.style.borderColor='#357ebd';
-        }
-        function changetofound(){                                                                   
-                var map=document.getElementById("NccuMap");
-                map.style.borderColor='#d43f3a';
-        }
+	window.fbAsyncInit = function() {
+		// init the FB JS SDK
+		FB.init({
+			appId      : FacebookAppId,                        // App ID from the app dashboard
+			cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+			status     : true,                                 // Check Facebook Login status
+			xfbml      : true                                  // Look for social plugins on the page
+		});
+
+		// Additional initialization code such as adding Event Listeners goes here
+		window.fbLoaded();
+	};
+
+	// Load the SDK asynchronously
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		//js.src = "//connect.facebook.net/en_US/all.js";
+		// Debug version of Facebook JS SDK
+		js.src = "//connect.facebook.net/en_US/all/debug.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
 </script>
 
 <div id="wrap">
@@ -190,15 +149,41 @@ $(document).ready(function() {
         </br>
         </br>        
         <div>
-        	<p>
-        		<button type="button" class="btn btn btn-primary" onclick= "changetolost();changeList('Lost')">lost</button>
-        		<button type="button" class="btn btn btn-danger"  onclick= "changetofound() ;changeList('Found')" >found</button>        
-        	</p>
         	<img id="NccuMap" src="./picture/nccumap.jpg" width="1024" height="678" usemap="#NCCU" />  
          	<map name="NCCU" id="Map">
-          		<area shape="rect" coords="450,400,550,500" onclick= "changeBuilding('Administration')" class="fancybox.iframe various"href="./list.html" rel="iframe">
+<!--          		<area shape="rect" coords="450,400,550,500" onclick= "changeBuilding('Administration')" class="fancybox.iframe various"href="./list.html" rel="iframe">
 			<area shape="rect" coords="750,350,850,450" onclick= "changeBuilding('ZhongYuan')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
- 
+<<<<<<< HEAD
+			<area shape="rect" coords="0,0,10,10" onclick ="changeBuilding('test')" class="fancybox.iframe various"href=./list.html" rel="iframe" > -->
+			<area shape="rect" coords="5,440,100,500 "onclick= "changeBuilding('Soc. Sci. Info. center')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="110,425,190,482 "onclick= "changeBuilding('Jing Tang Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="200,400,275,490 "onclick= "changeBuilding('Qi Xian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="270,500,320,570 "onclick= "changeBuilding('Yi Xian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="220,580,345,660 "onclick= "changeBuilding('Xue Xi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="300,395,435,480 "onclick= "changeBuilding('Main Library')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="350,490,435,570 "onclick= "changeBuilding('College of Commerce')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="360,575,430,665 "onclick= "changeBuilding('Research Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="460,420,570,480 "onclick= "changeBuilding('Si Wei Hall')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="590,400,680,500 "onclick= "changeBuilding('Administrative Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="465,545,500,600 "onclick= "changeBuilding('Zhi Xi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="520,550,565,605 "onclick= "changeBuilding('Guo Fu Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="535,615,630,665 "onclick= "changeBuilding('Le Huo Plaza')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="575,545,680,590 "onclick= "changeBuilding('Info. Tec. Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="690,555,785,600 "onclick= "changeBuilding('Dept. of Journalism')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="660,610,725,660 "onclick= "changeBuilding('Uni Co-op')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="810,605,890,650 "onclick= "changeBuilding('Da Zhi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="790,560,880,600 "onclick= "changeBuilding('Da Ren Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="795,470,910,520 "onclick= "changeBuilding('Da Yong Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="770,355,880,460 "onclick= "changeBuilding('General Bldg. of Colleges')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="720,295,835,345 "onclick= "changeBuilding('Gymnasuim')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="555,205,640,250 "onclick= "changeBuilding('College of Communication')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="640,160,725,215 "onclick= "changeBuilding('Dao Fan Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="670,120,740,160 "onclick= "changeBuilding('Bai Nian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="560,100,660,140 "onclick= "changeBuilding('Ji Tao Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="640,45,775,100 "onclick= "changeBuilding('International Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="770,110,915,170 "onclick= "changeBuilding('Art& Culture Center')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+=======
+>>>>>>> 4e99445a2851ffe71d04160c92e018f9a4299861
               	</map> 
 	</div>
 </div>
@@ -211,86 +196,41 @@ $(document).ready(function() {
 
 <!--script src="./dist/js/bootstrap.min.js"></script>-->
 
-	<!-- BLOCK: Your script playground-->
-
-    <script id="my-script-playground">
-
-        window.fbLoaded = function(){
-
-            // define the events when login status changed.
-
-
-
-            FB.Event.subscribe('auth.login', function(response) {
-
-
-
-                // when user has been logged in, this block will be triggered.
-
-                var msg = "You're logged in.";
-
-                $("#my-login-message").html(msg);
-
-                console.log("Your login response:");
-
-                console.log(response);
-
-                // fetch the profile
-
-                fetch_my_profile();
-
-            });
-
-            // define the action when user clicked the login button.
-
-
-
-            $("#my-login-button").click(function(){
-
-                FB.login();
-
-            });
-
-            var fetch_my_profile = function () {
-
-   
-
-                FB.api('/me', function(response) {
-
-                    var my_name = response.name;
-
-                    var my_gender = response.gender;
-
-                    var my_username = response.username;
-
-                    var my_facebook_id = response.id;
-
-                    $("#my-profile-name").html(my_name);
-
-                    $("#my-profile-gender").html(my_gender);
-
-                    $("#my-profile-username").html(my_username);
-
-                    $("#my-profile-facebook-id").html(my_facebook_id);
-
-                });
-
-                FB.api('/me/picture?width=250', function(response) {
-
-                    var my_picture_url = response.data.url;
-
-                
-
-                    $("#my-profile-picture").attr('src', my_picture_url);
-
-                });
-
-            };
-
-        };
-
-    </script>
-
+<!-- BLOCK: Your script playground-->
+<script id="my-script-playground">
+	window.fbLoaded = function(){
+		// define the events when login status changed.
+		FB.Event.subscribe('auth.login', function(response) {
+			// when user has been logged in, this block will be triggered.
+			var msg = "You're logged in.";
+			$("#my-login-message").html(msg);
+			console.log("Your login response:");
+			console.log(response);
+			// fetch the profile
+			fetch_my_profile();
+		});
+		// define the action when user clicked the login button.
+		$("#my-login-button").click(function(){
+			FB.login();
+		});
+		var fetch_my_profile = function () {
+			FB.api('/me', function(response) {
+				var my_name = response.name;
+				var my_gender = response.gender;
+				var my_username = response.username;
+				var my_facebook_id = response.id;
+				$("#my-profile-name").html(my_name);
+				$("#my-profile-gender").html(my_gender);
+				$("#my-profile-username").html(my_username);
+				$("#my-profile-facebook-id").html(my_facebook_id);
+			});
+			FB.api('/me/picture?width=250', function(response) {
+				var my_picture_url = response.data.url;
+				$("#my-profile-picture").attr('src', my_picture_url);
+			});
+		};
+	};
+</script>
 <!-- EndBlock-->
 
 </body>
