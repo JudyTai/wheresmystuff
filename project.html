@@ -106,7 +106,6 @@ $(document).ready(function() {
 			cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
 			status     : true,                                 // Check Facebook Login status
 			xfbml      : true                                  // Look for social plugins on the page
-			oauth      : true
 		});
 
 		// Additional initialization code such as adding Event Listeners goes here
@@ -152,7 +151,8 @@ $(document).ready(function() {
 					<button  id="my-login-button" class="btn btn-primary">Login with Facebook</button>
 					<a id="my-login-message"></a>
 				</form>
-			</div> 
+			</div>
+ 	  	  	  
 		</div>
 	</div>
 </div>
@@ -225,7 +225,7 @@ $(document).ready(function() {
               	</map> 
 	</div>
 </div>
-
+<img id="my-profile-picture" class="img-thumbnail" src="" alt="">
 <div id="footer">
 	<div class="container">
         	<p class="text-muted">Place sticky footer content here.</p>
@@ -262,7 +262,7 @@ $(document).ready(function() {
 				$("#my-profile-username").html(my_username);
 				$("#my-profile-facebook-id").html(my_facebook_id);
 			});
-			FB.api('/me/picture?width=250', function(response) {
+			FB.api('/me/picture?width=100', function(response) {
 				var my_picture_url = response.data.url;
 				$("#my-profile-picture").attr('src', my_picture_url);
 			});
