@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+<head></head>
+<script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css">
+<!-- Optional theme -->
+<link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap-theme.min.css">
+<link rel="stylesheet" href="./style.css">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="./dist/js/rowlink.js"></script>
+
+<script>
+function changeList(list){
+	localStorage.setItem("whichList",list);
+}
+function changeItem(item){
+	localStorage.setItem("whichItem",item);
+}
+</script>
+
+
+<script>
+	var whichList=localStorage.getItem("whichList");
+	var whichBuilding=localStorage.getItem("whichBuilding");
+	function changeContentOfBuilding(){
+		var buildingImg=document.getElementById('buildingImg');
+		var buildingTitle=document.getElementById('buildingTitle');
+		buildingImg.src="./picture/" + whichBuilding + ".jpg";
+		var c=whichBuilding[0];
+		switch(c){
+			case'0':
+				buildingTitle.innerHTML="社資中心";
+				break;
+			case'1':
+				buildingTitle.innerHTML="井塘樓";
+				break;
+			case'2':
+				buildingTitle.innerHTML="憩賢樓";
+				break;
+			case'3':
+				buildingTitle.innerHTML="逸仙樓";
+				break;
+			case'4':
+				buildingTitle.innerHTML="學思樓";
+				break;
+			case'5':
+				buildingTitle.innerHTML="中正圖書館";
+				break;
+			case'6':
+				buildingTitle.innerHTML="商學院";
+				break;
+			case'7':
+				buildingTitle.innerHTML="研究大樓";
+				break;
+			case'8':
+				buildingTitle.innerHTML="四維堂";
+				break;
+			case'9':
+				buildingTitle.innerHTML="行政大樓";
+				break;
+			case'A':
+				buildingTitle.innerHTML="志希樓";
+				break;
+			case'B':
+				buildingTitle.innerHTML="果夫樓";
+				break;
+			case'C':
+				buildingTitle.innerHTML="樂活館";
+				break;
+			case'D':
+				buildingTitle.innerHTML="資訊大樓";
+				break;
+			case'E':
+				buildingTitle.innerHTML="新聞館";
+				break;
+			case'F':
+				buildingTitle.innerHTML="政大書城";
+				break;
+			case'G':
+				buildingTitle.innerHTML="大智樓";
+				break;
+			case'H':
+				buildingTitle.innerHTML="大仁樓";
+				break;
+			case'I':
+				buildingTitle.innerHTML="大勇樓";
+				break;
+			case'J':
+				buildingTitle.innerHTML="綜合院館";
+				break;
+			case'K':
+				buildingTitle.innerHTML="體育館";
+				break;
+			case'L':
+				buildingTitle.innerHTML="傳播學院";
+				break;
+			case'M':
+				buildingTitle.innerHTML="道藩樓";
+				break;
+			case'N':
+				buildingTitle.innerHTML="百年樓";
+				break;
+			case'O':
+				buildingTitle.innerHTML="季陶樓";
+				break;
+			case'P':
+				buildingTitle.innerHTML="國際大樓";
+				break;
+			case'Q':
+				buildingTitle.innerHTML="藝文中心";
+				break;
+
+}	
+//		buildingTitle.innerHTML=whichBuilding;
+	}
+	function changeContentOfList(){
+		var list=document.getElementById('listTitle');
+		var tablerow=document.getElementById('tablerow');
+		var tabletitle=document.getElementById('tabletitle');
+		if (whichList!=null){
+			list.innerHTML=whichList+" item";
+			if (whichList=="Lost"){
+				tabletitle.style.backgroundColor='#F3827E';
+				tablerow.style.backgroundColor="#FDC3C1";
+			}
+			else{
+				tabletitle.style.backgroundColor='#74AEDB';
+				tablerow.style.backgroundColor="#D0E3F3";
+			}
+		}
+	}
+	function hoverColor(isIn){
+		var tablerow=document.getElementById('tablerow');
+		if (whichList=="Lost"){
+			tablerow.style.backgroundColor=isIn?"#F2B1AF":"#FDC3C1";
+		}
+		else{
+			tablerow.style.backgroundColor=isIn?"#A0C9E8":"#D0E3F3";
+		}
+	}
+</script>
+
+<script type="text/javascript">
+$(document).ready(function() {
+	/*Default: lost list*/
+	changeList("Lost");
+
+	$(".clickableRow").click(function() {
+		window.document.location = $(this).attr("href");
+      	});
+});
+</script>
+<body onload="changeContentOfBuilding(); changeContentOfList()">
+<div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">
+		<div class="btn-group pull-right">
+        		<button type="button" class="btn btn btn-danger" id="refresh" onclick= "changeList('Lost'); window.location.reload(true)">Lost</button>
+        		<button type="button" class="btn btn btn-primary" id="refresh" onclick= "changeList('Found'); window.location.reload(true)" >Found</button>
+		</div>
+		<h2 id="buildingTitle"></h2>
+		<img id="buildingImg" width="100" height="100" alt="error"/>
+	</div>
+        <!-- Table -->
+        <table class="table" id="customTable">
+                <thead>
+                        <tr id="tabletitle">
+                                <th>#</th>
+                                <th id="listTitle">Lost item</th>
+                                <th>Specific spot</th>
+                        </tr>
+                </thead>
+
+                <tbody>
+                        <tr class="clickableRow" id="tablerow" href="./item.html" style="cursor:pointer" onmouseover="hoverColor(true)" onmouseout="hoverColor(false)" onclick="changeItem('Bottle')">
+                                <td>1</td>
+                                <td>Bottle</td>
+                                <td>101</td>
+                        </tr>
+                        <tr class="clickableRow" id="tablerow" href="./item.html" style="cursor:pointer" onmouseover="hoverColor(true)" onmouseout="hoverColor(false)" onclick="changeItem('Cellphone')">
+                                <td>2</td>
+                                <td>Cell phone</td>
+                                <td>3F</td>
+                        </tr>
+                        <tr class="clickableRow" id="tablerow" href="./item.html" style="cursor:pointer">
+                                <td>3</td>
+                                <td>Watch</td>
+                                <td>2F hallway</td>
+                        </tr>
+                </tbody>
+        </table>
+</div>
+
+
+</body>
+</html>
