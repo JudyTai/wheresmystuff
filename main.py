@@ -25,5 +25,5 @@ def login():
     template_data = {
         'facebook_app_id': FACEBOOK_APP_ID
     }
-    return jinja2_template('index.html', **template_data)
+    return jinja2_template('project.html', **template_data)
 
