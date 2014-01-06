@@ -1,0 +1,4 @@
+bottle
+jinja2
+gunicorn
+facebook-sdk

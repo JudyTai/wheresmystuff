@@ -7,7 +7,7 @@
 <!-- Bootstrap core CSS -->
 <link href="./dist/css/bootstrap.css" rel="stylesheet">
 <!-- Add jQuery library -->
-<!script type="text/javascript" src="./lib/jquery-1.10.1.min.js"></script>
+<!--script type="text/javascript" src="./lib/jquery-1.10.1.min.js"></script>-->
 <script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
 <!-- Add mousewheel plugin (this is optional) -->
 <script type="text/javascript" src="./lib/jquery.mousewheel-3.0.6.pack.js"></script>
@@ -31,9 +31,9 @@ $(document).ready(function() {
 	/*Default: lost list*/
 	changeList("Lost");
 	$('map > area.fancybox').click(function(e) {
-		changeBuilding("ZhongYuan");
+		changeBuilding("background");
 		//localStorage.setItem("whichBuilding","background");
-		//alert("welcome");
+		alert("welcome");
 		e.preventDefault();
         	var url = $(this).attr('href');
         	var title = $(this).attr('title');
