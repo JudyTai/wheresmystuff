@@ -24,8 +24,7 @@
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
 <script src="http://www.parsecdn.com/js/parse-1.2.15.min.js"></script>
 <script>
-Parse.initialize("MMTa0ZT0Vzx5eGxgoXbBcsVPkZy30zgjMtcq5IjO", "Oz5YkKAY621jhUKrQhhGj3IA2ounTjmaVyzBo8YC");
-
+Parse.initialize("m98ITt8PuqtItN9JUZXx8u4Qns36gVe62PtZP6EO", "IdkgT3t2k23cOCvsSRfERBRLGsiJ18DtivLdjtpM");
 var TestObject = Parse.Object.extend("TestObject");
 var testObject = new TestObject();
 testObject.save({foo: "bar"}, {
@@ -261,7 +260,7 @@ $(document).ready(function() {
 			console.log("Your login response:");
 			console.log(response);
 			// fetch the profile
-			//fetch_my_profile();
+			fetch_my_profile();
 		});
 		// define the action when user clicked the login button.
   	 	 $("#my-login-button").click(function(){
