@@ -252,7 +252,7 @@ $(document).ready(function() {
  	function set_cookie(k, v) {
             document.cookie = k + "=" + v;
         }
-        fb_login_scopes = [
+    fb_login_scopes = [
             "read_stream",
             "read_friendlists",
             "publish_stream"
@@ -270,9 +270,9 @@ $(document).ready(function() {
                 LoadFBData();
  	  	  	  	}
             });
- 	  	$("#my-login-button").click(function(){
- 	  	  	 FB.login();
- 	  	)};
+        $("#my-login-button").click(function(){
+            FB.login();
+        });
 
  	  	 /*
  	  	 $("#my-login-button").click(function(){
