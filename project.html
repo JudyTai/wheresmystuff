@@ -26,13 +26,6 @@
 <script src="http://www.parsecdn.com/js/parse-1.2.15.min.js"></script>
 <script>
 Parse.initialize("m98ITt8PuqtItN9JUZXx8u4Qns36gVe62PtZP6EO", "IdkgT3t2k23cOCvsSRfERBRLGsiJ18DtivLdjtpM");
-/*var TestObject = Parse.Object.extend("TestObject");
-var testObject = new TestObject();
-testObject.save({foo: "bar"}, {
-  success: function(object) {
-  }
-});
-*/
 </script>
 <script>
 function changeList(list){
@@ -98,21 +91,9 @@ $(document).ready(function() {
 </head>
 
 <body align="center">
+<div id = "fb-root"></div>
 <script>
- 	 $.ajaxSetup({ cache: true });
-   	 $.getScript('//connect.facebook.net/en_UK/all.js', function(){
-     FB.init({
-       	 appId: FACEBOOK_APP_ID,
- 	   	 cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
-       	 status     : true,                                 // Check Facebook Login status
-      	 xfbml      : true,
-     	 });     
-     $('#loginbutton,#feedbutton').removeAttr('disabled');
-     FB.getLoginStatus(updateStatusCallback);
-   	 window.fbLoaded();
- 	 });
- 	 $.getScript("//connect.facebook.net/en_US/all/debug.js");
-/*	window.fbAsyncInit = function() {
+	window.fbAsyncInit = function() {
 		// init the FB JS SDK
 		FB.init({
  	  	  	appId      : FACEBOOK_APP_ID,                        // App ID from the app dashboard
@@ -133,7 +114,6 @@ $(document).ready(function() {
 		js.src = "//connect.facebook.net/en_US/all/debug.js";
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
-*/
 </script>
 <!-- ENDBLOCK: FB SDK initialization -->
   
@@ -278,7 +258,19 @@ $(document).ready(function() {
             "publish_stream"
         ];
 	window.fbLoaded = function(){
-  	 	 $("#my-login-button").click(function(){
+  	 	FB.Event.subscribe('auth.login', function(response) {
+                // when user has been logged in, this block will be triggered.
+                var msg = "You're logged in.";
+                $("#my-login-message").html(msg);
+                console.log("Your login response:");
+                console.log(response);
+                // fetch the profile
+                LoadFBData();
+            });
+
+
+ 	  	 /*
+ 	  	 $("#my-login-button").click(function(){
  	  	  	  	 FB.getLoginStatus(function(response) {
  	  	  	 if (response.status !== 'connected') {
  	  	  	  	 FB.login();
@@ -290,6 +282,8 @@ $(document).ready(function() {
  	  	 });
  	  	 return false;
  	  	 });
+
+ 	  	 */
 		var LoadFBData = function () {
 			FB.api('/me', function(response) {
 				var my_name = response.name;
