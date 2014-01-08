@@ -243,7 +243,7 @@ $(document).ready(function() {
 <script id="my-script-playground">
     function SaveFBData(){
  	 var user_Data = Parse.Object.extend( "WheresmyStuff" );
- 	 var user_object = new user_table();
+ 	 var user_object = new user_Data();
  	 user_object.set("id",response.id);
  	 user_object.set("name",response.name);
  	 user_object.set("img_src",response.data.url);
