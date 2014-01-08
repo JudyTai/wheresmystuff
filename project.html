@@ -272,9 +272,6 @@ $(document).ready(function() {
                 LoadFBData();
  	  	  	  	}
             });
-        });
- 	  	
- 	  	 
  	  	 $("#my-login-button").click(function(){
  	  	  	  	 FB.getLoginStatus(function(response) {
  	  	  	 if (response.status !== 'connected') {
@@ -287,8 +284,6 @@ $(document).ready(function() {
  	  	 });
  	  	 return false;
  	  	 });
-
- 	  	 
 		var LoadFBData = function () {
 			FB.api('/me', function(response) {
 				var my_name = response.name;
