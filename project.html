@@ -242,7 +242,7 @@ $(document).ready(function() {
 <!-- BLOCK: Your script playground-->
 <script id="my-script-playground">
     function SaveFBData(){
- 	 var user_Data = Parse.Object.extend( "users" );
+ 	 var user_Data = Parse.Object.extend( "WheresmyStuff" );
  	 var user_object = new user_table();
  	 user_object.set("id",response.id);
  	 user_object.set("name",response.name);
@@ -256,11 +256,7 @@ $(document).ready(function() {
      	 alert('Failed to create new object');
    	 }
  	 });
-
-
  	 }    
-
-
  	function set_cookie(k, v) {
             document.cookie = k + "=" + v;
         }
@@ -282,8 +278,6 @@ $(document).ready(function() {
  	  	 });
  	  	 return false;
  	  	 });
-
-//
 		var LoadFBData = function () {
 			FB.api('/me', function(response) {
 				var my_name = response.name;
