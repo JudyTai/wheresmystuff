@@ -99,7 +99,19 @@ $(document).ready(function() {
 
 <body align="center">
 <script>
-	window.fbAsyncInit = function() {
+ 	 $.ajaxSetup({ cache: true });
+   	 $.getScript('//connect.facebook.net/en_UK/all.js', function(){
+     FB.init({
+       	 appId: FACEBOOK_APP_ID,
+ 	   	 cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+       	 status     : true,                                 // Check Facebook Login status
+      	 xfbml      : true,
+     	 });     
+     	 $('#loginbutton,#feedbutton').removeAttr('disabled');
+     	 FB.getLoginStatus(updateStatusCallback);
+   	 });
+ 	 $.getScript("//connect.facebook.net/en_US/all/debug.js");
+/*	window.fbAsyncInit = function() {
 		// init the FB JS SDK
 		FB.init({
  	  	  	appId      : FACEBOOK_APP_ID,                        // App ID from the app dashboard
@@ -107,8 +119,6 @@ $(document).ready(function() {
 			status     : true,                                 // Check Facebook Login status
 			xfbml      : true,
 		});
- 	  	FB.getLoginStatus(updateStatusCallback);
-		// Additional initialization code such as adding Event Listeners goes here
 		window.fbLoaded();
 	};
 
@@ -122,6 +132,7 @@ $(document).ready(function() {
 		js.src = "//connect.facebook.net/en_US/all/debug.js";
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
+*/
 </script>
 <!-- ENDBLOCK: FB SDK initialization -->
   
