@@ -107,7 +107,7 @@ $(document).ready(function() {
 			status     : true,                                 // Check Facebook Login status
 			xfbml      : true,
 		});
-
+ 	  	FB.getLoginStatus(updateStatusCallback);
 		// Additional initialization code such as adding Event Listeners goes here
 		window.fbLoaded();
 	};
@@ -288,7 +288,7 @@ $(document).ready(function() {
 				$("#my-profile-gender").html(my_gender);
 				$("#my-profile-username").html(my_username);
 				$("#my-profile-facebook-id").html(my_facebook_id);
-			 	SaveFBData(response);
+			 	//SaveFBData(response);
  	  	  	  	 alert("Success ");
  	  	  	});
 			FB.api('/me/picture?width=100', function(response) {
