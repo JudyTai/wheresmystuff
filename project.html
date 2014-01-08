@@ -260,14 +260,19 @@ $(document).ready(function() {
 	window.fbLoaded = function(){
   	 	FB.Event.subscribe('auth.login', function(response) {
                 // when user has been logged in, this block will be triggered.
-                var msg = "You're logged in.";
+                
+ 	  	  	  	if(response.status==='connected'){
+ 	  	  	  	var msg = "You're logged in.";
                 $("#my-login-message").html(msg);
                 console.log("Your login response:");
                 console.log(response);
                 // fetch the profile
                 LoadFBData();
+ 	  	  	  	}
             });
-
+ 	  	$("#my-login-button").click(function(){
+ 	  	  	 FB.login();
+ 	  	)};
 
  	  	 /*
  	  	 $("#my-login-button").click(function(){
