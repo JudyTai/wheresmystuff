@@ -264,7 +264,8 @@ $(document).ready(function() {
  	  	  	  	// when user has been logged in, this block will be triggered.
  	  	  	  	alert("EVENT");
  	  	  	  	if(response.status=='connected'){
- 	  	  	  	var msg = "You're logged in.";
+ 	  	  	  	alert("con");
+ 	  	  	    var msg = "You're logged in.";
                 $("#my-login-message").html(msg);
                 console.log("Your login response:");
                 console.log(response);
@@ -278,8 +279,8 @@ $(document).ready(function() {
  	  	  	  	 FB.login();
  	  	  	  	 }
  	  	  	 if(response.status == 'connected'){
- 	  	  	  	 alert("CONNECTED");
  	  	  	  	 var msg = "You're logged in.";
+ 	  	  	  	 $("#my-login-message").html(msg);
  	  	  	  	 LoadFBData();
  	  	  	  	}
  	  	 });
