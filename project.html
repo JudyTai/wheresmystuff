@@ -101,9 +101,11 @@ $(document).ready(function() {
 			status     : true,                                 // Check Facebook Login status
 			xfbml      : true,
 		});
-		window.fbLoaded();
-	};
+ 	  	window.fbLoaded();
+	 	 
 
+ 	 };
+ 	 
 	// Load the SDK asynchronously
 	(function(d, s, id){
 		var js, fjs = d.getElementsByTagName(s)[0];
@@ -259,7 +261,8 @@ $(document).ready(function() {
         ];
 	window.fbLoaded = function(){
   	 	FB.Event.subscribe('auth.login', function(response) {
-                // when user has been logged in, this block will be triggered.
+                window.location.reload();
+ 	  	  	  	// when user has been logged in, this block will be triggered.
  	  	  	  	alert("EVENT");
  	  	  	  	if(response.status==='connected'){
  	  	  	  	var msg = "You're logged in.";
