@@ -29,6 +29,30 @@
 </head>
 
 <body>
+<div id = "fb-root"></div>
+<script>
+    window.fbAsyncInit = function() {
+        // init the FB JS SDK
+        FB.init({
+            appId      : FACEBOOK_APP_ID,                        // App ID from the app dashboard
+            cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+            status     : true,                                 // Check Facebook Login status
+            xfbml      : true,
+        });
+        window.fbLoaded();
+     };
+    // Load the SDK asynchronously
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        //js.src = "//connect.facebook.net/en_US/all.js";
+        // Debug version of Facebook JS SDK
+        js.src = "//connect.facebook.net/en_US/all/debug.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
 <div id="wrap">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 		<div class="container">
@@ -88,11 +112,48 @@
 			</div><!--row-->
 		</div><!--container-->
 </div>
+<script id="my-script-playground">
+ 	 function set_cookie(k, v) {
+            document.cookie = k + "=" + v;
+        }
+    fb_login_scopes = [
+            "read_stream",
+            "read_friendlists",
+            "publish_stream"
+        ];
+    window.fbLoaded = function(){
+        FB.Event.subscribe('auth.authResponseChange', function(response) {
+            if(response.status==='connected'){
+                var msg = "You're logged in.";
+                $("#my-login-message").html(msg);
+                // fetch the profile
+                LoadFBData();
+                }
+            });
+         $("#my-login-button").click(function(){
+             FB.login();
+         });
+ 	  	 var LoadFBData = function () {
+            FB.api('/me', function(response) {
+                var my_name = response.name;
+                var my_gender = response.gender;
+                var my_username = response.username;
+                var my_facebook_id = response.id;
+                $("#my-profile-name").html(my_name);
+                $("#my-profile-gender").html(my_gender);
+                $("#my-profile-username").html(my_username);
+                $("#my-profile-facebook-id").html(my_facebook_id);
+            });
+            FB.api('/me/picture?width=100', function(response) {
+                var my_picture_url = response.data.url;
+                $("#my-profile-picture").attr('src', my_picture_url);
+            });     
+         };
+    };
+</script>
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bootstrap/docs-assets/js/holder.js"></script>
 </body>
 </html>
