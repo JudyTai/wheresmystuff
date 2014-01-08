@@ -101,8 +101,9 @@ $(document).ready(function() {
 	window.fbAsyncInit = function() {
 		// init the FB JS SDK
 		FB.init({
-			appId      : FacebookAppId,                        // App ID from the app dashboard
-			cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+ 	  	  	appId      : FACEBOOK_APP_ID,                        // App ID from the app dashboard
+ 	  		secreto    : FACEBOOK_SECRET,
+ 	  	  	cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
 			status     : true,                                 // Check Facebook Login status
 			xfbml      : true,
  	  	  	oauth      : true                                  // Look for social plugins on the page
