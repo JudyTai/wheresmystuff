@@ -285,12 +285,11 @@ $(document).ready(function() {
  	  	});
 		// define the action when user clicked the login button.
   	 	 $("#my-login-button").click(function(){
- 	  	  	  	 alert("FBlogin");
                 FB.login(function(response){
-                    // here we need to set cookie manually because of changes on Facebook's OAuth
                     if (response.authResponse) {
                         var accessToken = response.authResponse.accessToken;
-                        set_cookie('fb_access_token', accessToken);
+                        set_cookie('fb_access_token', accessToken); 
+ 	  	  	  	  	  	alert("FBlogin1");
                     }
                 }, {
                     'scope': fb_login_scopes.join(",")
