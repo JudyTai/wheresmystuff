@@ -22,7 +22,17 @@
 <!-- Add Media helper (this is optional) -->
 <script type="text/javascript" src="./source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="http://www.parsecdn.com/js/parse-1.2.15.min.js"></script>
+<script>
+Parse.initialize("MMTa0ZT0Vzx5eGxgoXbBcsVPkZy30zgjMtcq5IjO", "Oz5YkKAY621jhUKrQhhGj3IA2ounTjmaVyzBo8YC");
 
+var TestObject = Parse.Object.extend("TestObject");
+var testObject = new TestObject();
+testObject.save({foo: "bar"}, {
+  success: function(object) {
+  }
+});
+</script>
 <script>
 function changeList(list){
 	localStorage.setItem("whichList",list);
@@ -96,6 +106,7 @@ $(document).ready(function() {
 			cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
 			status     : true,                                 // Check Facebook Login status
 			xfbml      : true                                  // Look for social plugins on the page
+			oauth      : true
 		});
 
 		// Additional initialization code such as adding Event Listeners goes here
@@ -113,7 +124,45 @@ $(document).ready(function() {
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));
 </script>
-
+<!-- ENDBLOCK: FB SDK initialization -->
+  
+  
+      <!-- BLOCK: Your script playground -->
+      <script id="my-script-playground">
+          // function to set cookie, never mind.
+          function set_cookie(k, v) {
+              document.cookie = k + "=" + v;
+          }
+          fb_login_scopes = [
+              "read_stream",
+              "read_friendlists",
+              "publish_stream"
+          ];
+          window.fbLoaded = function(){
+              // define the events when login status changed.
+              FB.Event.subscribe('auth.login', function(response) {
+                  // when user has been logged in, this block will be triggered.
+                  var msg = "You're logged in.";
+                  $("#my-login-message").html(msg);
+                  console.log("Your login response:");
+                  console.log(response);
+              });
+  
+              // define the action when user clicked the login button.
+              $("#my-login-button").click(function(){
+                  FB.login(function(response){
+ 					// here we need to set cookie manually because of changes on Facebook's OAuth
+                      if (response.authResponse) {
+                          var accessToken = response.authResponse.accessToken;
+                          set_cookie('fb_access_token', accessToken);
+                      }
+                  }, {
+                      'scope': fb_login_scopes.join(",")
+                  });
+              });
+          };
+      </script>
+      <!-- ENDBLOCK: Your script playground -->
 <div id="wrap">
 	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
 	        <div class="container">
@@ -124,7 +173,7 @@ $(document).ready(function() {
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand"><strong>Where's my stuff?</strong></a>
+				<a href="project.html" class="navbar-brand"><strong>Where's my stuff?</strong></a>
 			</div>
 
 			<div >
@@ -155,6 +204,35 @@ $(document).ready(function() {
 			<area shape="rect" coords="750,350,850,450" onclick= "changeBuilding('ZhongYuan')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
 <<<<<<< HEAD
 			<area shape="rect" coords="0,0,10,10" onclick ="changeBuilding('test')" class="fancybox.iframe various"href=./list.html" rel="iframe" > -->
+<<<<<<< HEAD
+			<area shape="rect" coords="5,440,100,500 "onclick= "changeBuilding('Soc. Sci. Info. center')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="110,425,190,482 "onclick= "changeBuilding('Jing Tang Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="200,400,275,490 "onclick= "changeBuilding('Qi Xian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="270,500,320,570 "onclick= "changeBuilding('Yi Xian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="220,580,345,660 "onclick= "changeBuilding('Xue Xi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="300,395,435,480 "onclick= "changeBuilding('Main Library')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="350,490,435,570 "onclick= "changeBuilding('College of Commerce')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="360,575,430,665 "onclick= "changeBuilding('Research Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="460,420,570,480 "onclick= "changeBuilding('Si Wei Hall')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="590,400,680,500 "onclick= "changeBuilding('Administrative Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="465,545,500,600 "onclick= "changeBuilding('Zhi Xi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="520,550,565,605 "onclick= "changeBuilding('Guo Fu Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="535,615,630,665 "onclick= "changeBuilding('Le Huo Plaza')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="575,545,680,590 "onclick= "changeBuilding('Info. Tec. Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="690,555,785,600 "onclick= "changeBuilding('Dept. of Journalism')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="660,610,725,660 "onclick= "changeBuilding('Uni Co-op')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="810,605,890,650 "onclick= "changeBuilding('Da Zhi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="790,560,880,600 "onclick= "changeBuilding('Da Ren Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="795,470,910,520 "onclick= "changeBuilding('Da Yong Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="770,355,880,460 "onclick= "changeBuilding('General Bldg. of Colleges')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="720,295,835,345 "onclick= "changeBuilding('Gymnasuim')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="555,205,640,250 "onclick= "changeBuilding('College of Communication')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="640,160,725,215 "onclick= "changeBuilding('Dao Fan Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="670,120,740,160 "onclick= "changeBuilding('Bai Nian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="560,100,660,140 "onclick= "changeBuilding('Ji Tao Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="640,45,775,100 "onclick= "changeBuilding('International Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="770,110,915,170 "onclick= "changeBuilding('Art& Culture Center')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+=======
 			
 			<area shape="rect" coords="5,440,100,500 "onclick= "changeBuilding('0')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
 			<area shape="rect" coords="110,425,190,482 "onclick= "changeBuilding('1')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
@@ -184,6 +262,7 @@ $(document).ready(function() {
 			<area shape="rect" coords="640,45,775,100 "onclick= "changeBuilding('P')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
 			<area shape="rect" coords="770,110,915,170 "onclick= "changeBuilding('Q')" class="fancybox.iframe various"href="./list.html" rel="iframe">
 
+>>>>>>> ba2263af415b3c90dbc014b91812f79dd44a349d
               	</map> 
 	</div>
 </div>
