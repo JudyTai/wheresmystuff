@@ -263,7 +263,7 @@ $(document).ready(function() {
   	 	FB.Event.subscribe('auth.login', function(response) {
  	  	  	  	// when user has been logged in, this block will be triggered.
  	  	  	  	alert("EVENT");
- 	  	  	  	if(response.status==='connected'){
+ 	  	  	  	if(response.status=='connected'){
  	  	  	  	var msg = "You're logged in.";
                 $("#my-login-message").html(msg);
                 console.log("Your login response:");
@@ -272,27 +272,23 @@ $(document).ready(function() {
                 LoadFBData();
  	  	  	  	}
             });
-        $("#my-login-button").click(function(){
-            if (response.status !== 'connected') {
-                 FB.login();
-            }
         });
-
- 	  	 /*
+ 	  	
+ 	  	 
  	  	 $("#my-login-button").click(function(){
  	  	  	  	 FB.getLoginStatus(function(response) {
  	  	  	 if (response.status !== 'connected') {
  	  	  	  	 FB.login();
  	  	  	  	 }
- 	  	  	  	 if(response.status == 'connected'){
+ 	  	  	 if(response.status == 'connected'){
  	  	  	  	 var msg = "You're logged in.";
  	  	  	  	 LoadFBData();
- 	  	  	  	 }
+ 	  	  	  	}
  	  	 });
  	  	 return false;
  	  	 });
 
- 	  	 */
+ 	  	 
 		var LoadFBData = function () {
 			FB.api('/me', function(response) {
 				var my_name = response.name;
