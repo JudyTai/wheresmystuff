@@ -70,9 +70,50 @@
 					<div class="list-group">
 					  <a href="profile.html" class="list-group-item">My Profile</a>
  					  <a href="profilelostlist.html" class="list-group-item">Lost List</a>
- 					  <a href="profilefoundlist.html" class="list-group-item active">Found List</a>
-					</div>
-					<a class="btn btn-primary btn-lg" role="button" href="fill.html">Add Item</a>
+		  			  <a href="profilefoundlist.html" class="list-group-item active">Found List</a>
+				</div>
+				<!-- Button trigger modal -->
+				<button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">Add Item</button>
+				<!-- Modal -->
+				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  					<div class="modal-dialog">
+    					<div class="modal-content">
+      						<div class="modal-header">
+        						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        						<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      						</div>
+      						<div class="modal-body">
+								<div class="input-group">
+ 								 <span class="input-group-addon">Item Name</span>
+ 								 <input type="text" class="form-control" placeholder="What's your Item Name">
+								</div>
+								<br>
+      							<div class="input-group">
+ 								 <span class="input-group-addon">Detail Area</span>
+ 								 <input type="text" class="form-control" placeholder="Where did you lost it">
+								</div>
+								<br>
+								<a href="#" role="button" class="btn btn-default popover-test" title="A Title" data-content="And here's some amazing content. It's very engaging. right?">Lost Area</a>
+								<br>
+								<hr>
+								<span class="help-block">Please write down the detail.</span>
+								<textarea class="form-control" rows="3"></textarea>
+								<br><br>
+								<div class="form-group">
+    								<label for="exampleInputFile">Upload the Image</label>
+    								<br>
+									<input type="file" id="exampleInputFile">
+    								<p class="help-block">有照片可以讓人更容易找到它</p>
+  								</div>
+								<br><br>
+							</div>
+      						<div class="modal-footer">
+        					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        					<button type="button" class="btn btn-primary">Save changes</button>
+      						</div>
+    					</div><!-- /.modal-content -->
+  					</div><!-- /.modal-dialog -->
+				</div><!-- /.modal -->
 				</div>
 				<div class="col-sm-8">
 					<div class="panel panel-default">
@@ -122,7 +163,11 @@
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->
 <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bootstrap/docs-assets/js/holder.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="dist/js/bootstrap.js"></script>
+<script src="docs-assets/js/holder.js"></script>
+<script src="docs-assets/js/application.js"></script>
+
 </body>
 </html>
