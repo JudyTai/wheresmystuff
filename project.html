@@ -25,12 +25,13 @@
 <script src="http://www.parsecdn.com/js/parse-1.2.15.min.js"></script>
 <script>
 Parse.initialize("m98ITt8PuqtItN9JUZXx8u4Qns36gVe62PtZP6EO", "IdkgT3t2k23cOCvsSRfERBRLGsiJ18DtivLdjtpM");
-var TestObject = Parse.Object.extend("TestObject");
+/*var TestObject = Parse.Object.extend("TestObject");
 var testObject = new TestObject();
 testObject.save({foo: "bar"}, {
   success: function(object) {
   }
 });
+*/
 </script>
 <script>
 function changeList(list){
@@ -244,7 +245,27 @@ $(document).ready(function() {
 
 <!-- BLOCK: Your script playground-->
 <script id="my-script-playground">
-        function set_cookie(k, v) {
+    function SaveFBData(response){
+ 	 var user_Data = Parse.Object.extend( "users" );
+ 	 var user_object = new user_table();
+ 	 user_object.set("id",response.id);
+ 	 user_object.set("name",response.name);
+ 	 user_object.set("img_src",response.data.url);
+ 	 user_object.save(null, {
+   	 success: function(user_object) {
+    // Execute any logic that should take place after the object is saved.
+     	 alert('New object created with objectId: ' + user_object.id);
+   	 },
+   	 error: function(user_object, error) {
+     	 alert('Failed to create new object');
+   	 }
+ 	 });
+
+
+ 	 }    
+
+
+ 	function set_cookie(k, v) {
             document.cookie = k + "=" + v;
         }
         fb_login_scopes = [
@@ -292,6 +313,7 @@ $(document).ready(function() {
 				var my_picture_url = response.data.url;
 				$("#my-profile-picture").attr('src', my_picture_url);
 			});
+ 	  	  	SaveFBData(response);
 		};
 	};
 </script>
