@@ -282,11 +282,14 @@ $(document).ready(function() {
 			console.log("Your login response:");
 			console.log(response);
 			// fetch the profile
+ 	  	  	
 			fetch_my_profile();
 		 	SaveFBData(response);
  	  	});
 		// define the action when user clicked the login button.
   	 	 $("#my-login-button").click(function(){
+ 	  	  	 FB.getLoginStatus(function(response){
+ 	  	  	 if(response.status !== 'connected'){
                 FB.login(function(response){
                     // here we need to set cookie manually because of changes on Facebook's OAuth
                     if (response.authResponse) {
@@ -296,6 +299,10 @@ $(document).ready(function() {
                 }, {
                     'scope': fb_login_scopes.join(",")
                 });
+ 	  	  	  	 }
+ 	  	  	 else {
+ 	  	  	  	}
+ 	  	  	 });
             });
 
 //
