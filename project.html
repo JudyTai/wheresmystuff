@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<head>
+<meta charset="utf-8">
+<link rel="shortcut icon" href="">
+<!--script type="text/javascript" src="./control.js"></script-->
+
+<script src="./heroku.js"></script>
+<!-- Add jQuery library -->
+<script type="text/javascript" src="http://code.jquery.com/jquery-git.js"></script>
+<!-- Bootstrap core CSS -->
+<link href="dist/css/bootstrap.css" rel="stylesheet">
+<!-- Add mousewheel plugin (this is optional) -->
+<script type="text/javascript" src="lib/jquery.mousewheel-3.0.6.pack.js"></script>
+<!-- Add fancyBox main JS and CSS files -->
+<script type="text/javascript" src="source/jquery.fancybox.js"></script>
+<link rel="stylesheet" type="text/css" href="source/jquery.fancybox.css" media="screen" />
+<!-- Add Button helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="source/helpers/jquery.fancybox-buttons.css" />
+<script type="text/javascript" src="source/helpers/jquery.fancybox-buttons.js"></script>
+<!-- Add Thumbnail helper (this is optional) -->
+<link rel="stylesheet" type="text/css" href="source/helpers/jquery.fancybox-thumbs.css" />
+<script type="text/javascript" src="source/helpers/jquery.fancybox-thumbs.js"></script>
+<!-- Add Media helper (this is optional) -->
+<script type="text/javascript" src="source/helpers/jquery.fancybox-media.js"></script>
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.2/js/bootstrap.min.js"></script>
+<script src="http://www.parsecdn.com/js/parse-1.2.15.min.js"></script>
+<script>
+Parse.initialize("m98ITt8PuqtItN9JUZXx8u4Qns36gVe62PtZP6EO", "IdkgT3t2k23cOCvsSRfERBRLGsiJ18DtivLdjtpM");
+</script>
+<script>
+function changeList(list){
+	localStorage.setItem("whichList",list);
+}
+
+function changeBuilding(building){
+	localStorage.setItem("whichBuilding",building);
+}
+</script>
+
+<script type="text/javascript">
+$('map > area.fancybox').click(function(e) {
+	//changeBuilding("nccumap");
+        e.preventDefault();
+        var url = $(this).attr('href');
+        var title = $(this).attr('title');
+        var type = $(this).attr('rel');
+    	$.fancybox({
+                'title': title,
+               	'titlePosition': 'inside',
+             	'href' : url,
+                'type' : type
+       	});
+});
+
+$(document).ready(function() {
+	$('.fancybox').fancybox();
+	$("#single_1").fancybox({
+		helpers: {
+			title : {
+				type : 'float'
+			}        
+                }
+	});
+	$(".various").fancybox({
+                maxWidth	: 800,
+                maxHeight	: 600,
+                fitToView	: false,
+                width		: '70%',
+		height		: '70%',
+		autoSize	: false,
+                closeClick	: false,
+                openEffect	: 'none',
+                closeEffect	: 'none'
+        });
+});
+</script>
+
+<style type="text/css">
+	.fancybox-custom .fancybox-skin {
+		box-shadow: 0 0 50px #222;
+	}
+</style>
+
+<meta http-equiv="X-UA-Compatible" content="width=device-width,initial-scale=1">
+<meta name="description" content="">
+<meta name="viewport">
+<meta name="author" content="">
+
+<title> Where's my Stuff?</title>
+
+</head>
+
+<body align="center">
+<div id = "fb-root"></div>
+<script>
+	window.fbAsyncInit = function() {
+		// init the FB JS SDK
+		FB.init({
+ 	  	  	appId      : FACEBOOK_APP_ID,                        // App ID from the app dashboard
+ 	  	  	cookie     : true,                                 // Allowed server-side to fetch fb auth cookie
+			status     : true,                                 // Check Facebook Login status
+			xfbml      : true,
+		});
+ 	  	window.fbLoaded();
+	 	 
+
+ 	 };
+ 	 
+	// Load the SDK asynchronously
+	(function(d, s, id){
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.id = id;
+		//js.src = "//connect.facebook.net/en_US/all.js";
+		// Debug version of Facebook JS SDK
+		js.src = "//connect.facebook.net/en_US/all/debug.js";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));
+</script>
+<!-- ENDBLOCK: FB SDK initialization -->
+  
+  
+    <div id="wrap">
+	<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	        <div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a href="project.html" class="navbar-brand"><strong>Where's my stuff?</strong></a>
+			</div>
+
+			<div >
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="project.html">Home</a></li>
+					<li><a href="#about">About</a></li>
+					<li><a href="profile.html">Profile</a></li>
+				</ul>
+			</div>
+			<div class="navbar-collapse collapse">
+				<form class="navbar-form navbar-right" role="form">
+					<button  id="my-login-button" class="btn btn-primary">Login with Facebook</button>
+					<a id="my-login-message"></a>
+				</form>
+			</div>
+ 	  	  	  
+		</div>
+	</div>
+</div>
+
+<div class="container">
+        </br>
+        </br>
+        </br>        
+        <div>
+        	<img id="NccuMap" src="./picture/nccumap.jpg" width="1024" height="678" usemap="#NCCU" />  
+         	<map name="NCCU" id="Map">
+<!--          		<area shape="rect" coords="450,400,550,500" onclick= "changeBuilding('Administration')" class="fancybox.iframe various"href="./list.html" rel="iframe">
+			<area shape="rect" coords="750,350,850,450" onclick= "changeBuilding('ZhongYuan')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="0,0,10,10" onclick ="changeBuilding('test')" class="fancybox.iframe various"href=./list.html" rel="iframe" > -->
+			<area shape="rect" coords="5,440,100,500 "onclick= "changeBuilding('Soc. Sci. Info. center')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="110,425,190,482 "onclick= "changeBuilding('Jing Tang Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="200,400,275,490 "onclick= "changeBuilding('Qi Xian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="270,500,320,570 "onclick= "changeBuilding('Yi Xian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="220,580,345,660 "onclick= "changeBuilding('Xue Xi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="300,395,435,480 "onclick= "changeBuilding('Main Library')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="350,490,435,570 "onclick= "changeBuilding('College of Commerce')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="360,575,430,665 "onclick= "changeBuilding('Research Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="460,420,570,480 "onclick= "changeBuilding('Si Wei Hall')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="590,400,680,500 "onclick= "changeBuilding('Administrative Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="465,545,500,600 "onclick= "changeBuilding('Zhi Xi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="520,550,565,605 "onclick= "changeBuilding('Guo Fu Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="535,615,630,665 "onclick= "changeBuilding('Le Huo Plaza')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="575,545,680,590 "onclick= "changeBuilding('Info. Tec. Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="690,555,785,600 "onclick= "changeBuilding('Dept. of Journalism')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="660,610,725,660 "onclick= "changeBuilding('Uni Co-op')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="810,605,890,650 "onclick= "changeBuilding('Da Zhi Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="790,560,880,600 "onclick= "changeBuilding('Da Ren Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="795,470,910,520 "onclick= "changeBuilding('Da Yong Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="770,355,880,460 "onclick= "changeBuilding('General Bldg. of Colleges')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="720,295,835,345 "onclick= "changeBuilding('Gymnasuim')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="555,205,640,250 "onclick= "changeBuilding('College of Communication')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="640,160,725,215 "onclick= "changeBuilding('Dao Fan Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="670,120,740,160 "onclick= "changeBuilding('Bai Nian Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="560,100,660,140 "onclick= "changeBuilding('Ji Tao Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="640,45,775,100 "onclick= "changeBuilding('International Bldg.')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="770,110,915,170 "onclick= "changeBuilding('Art& Culture Center')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="5,440,100,500 "onclick= "changeBuilding('0')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="110,425,190,482 "onclick= "changeBuilding('1')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="200,400,275,490 "onclick= "changeBuilding('2')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="270,500,320,570 "onclick= "changeBuilding('3')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="220,580,345,660 "onclick= "changeBuilding('4')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="300,395,435,480 "onclick= "changeBuilding('5')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="350,490,435,570 "onclick= "changeBuilding('6')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="360,575,430,665 "onclick= "changeBuilding('7')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="460,420,570,480 "onclick= "changeBuilding('8')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="590,400,680,500 "onclick= "changeBuilding('9')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="465,545,500,600 "onclick= "changeBuilding('A')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="520,550,565,605 "onclick= "changeBuilding('B')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="535,615,630,665 "onclick= "changeBuilding('C')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="575,545,680,610 "onclick= "changeBuilding('D')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="690,555,785,600 "onclick= "changeBuilding('E')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="660,610,725,660 "onclick= "changeBuilding('F')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="810,605,890,650 "onclick= "changeBuilding('G')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="790,560,880,600 "onclick= "changeBuilding('H')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="795,470,910,520 "onclick= "changeBuilding('I')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="770,355,880,460 "onclick= "changeBuilding('J')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="720,295,835,345 "onclick= "changeBuilding('K')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="555,205,640,250 "onclick= "changeBuilding('L')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="640,160,725,215 "onclick= "changeBuilding('M')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="670,120,740,160 "onclick= "changeBuilding('N')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="560,100,660,140 "onclick= "changeBuilding('O')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="640,45,775,100 "onclick= "changeBuilding('P')" class="fancybox.iframe various"href="./list.html" rel="iframe"> 
+			<area shape="rect" coords="770,110,915,170 "onclick= "changeBuilding('Q')" class="fancybox.iframe various"href="./list.html" rel="iframe">
+
+              	</map> 
+	</div>
+</div>
+<img id="my-profile-picture" class="img-thumbnail" src="" alt="">
+<h4> 	  	  	  	 
+<dl>
+                 	 <dd id="my-profile-name"></dd>
+                    <dd id="my-profile-gender"></dd>
+                    <dd id="my-profile-username"></dd>
+                    <dd id="my-profile-facebook-id"></dd>
+                </dl>
+ 	  	  	 </h4>
+<div id="footer">
+	<div class="container">
+        	<p class="text-muted">Place sticky footer content here.</p>
+	</div>
+</div>
+<!-- BLOCK: Your script playground-->
+<script id="my-script-playground">
+    function SaveFBData(response){
+ 	 var user_Data = Parse.Object.extend( "WheresmyStuff" );
+ 	 var user_object = new user_Data();
+ 	 user_object.set("id",response.id);
+ 	 user_object.set("name",response.name);
+ 	 //user_object.set("img_src",response.data.url);
+ 	 user_object.save(null, {
+   	 success: function() {
+    // Execute any logic that should take place after the object is saved.
+     	 alert('New object created with objectId: ');
+   	 },
+   	 error: function() {
+     	 alert('Failed to create new object');
+   	 }
+ 	 });
+ 	 }    
+ 	function set_cookie(k, v) {
+            document.cookie = k + "=" + v;
+        }
+    fb_login_scopes = [
+            "read_stream",
+            "read_friendlists",
+            "publish_stream"
+        ];
+	window.fbLoaded = function(){
+  	 	FB.Event.subscribe('auth.authResponseChange', function(response) {
+ 	  	  	  	// when user has been logged in, this block will be triggered.
+ 	  	  	  	alert("EVENT");
+ 	  	  	  	if(response.status==='connected'){
+ 	  	  	  	alert("con");
+ 	  	  	    var msg = "You're logged in.";
+                $("#my-login-message").html(msg);
+                // fetch the profile
+                LoadFBData();
+ 	  	  	  	}
+            });
+ 	  	 $("#my-login-button").click(function(){
+ 	  	  /*	  	 FB.getLoginStatus(function(response) {
+ 	  	  	 if (response.status !== 'connected') {
+ 	  	  	  	 FB.login();
+ 	  	  	  	 }
+ 	  	  	 if(response.status == 'connected'){
+ 	  	  	  	 var msg = "You're logged in.";
+ 	  	  	  	 $("#my-login-message").html(msg);
+ 	  	  	  	 LoadFBData();
+ 	  	  	  	}
+ 	  	  	 });
+ 	  	  	 return false;*/
+ 	  	  	 FB.login();
+ 	  	 });
+		var LoadFBData = function () {
+			FB.api('/me', function(response) {
+				var my_name = response.name;
+				var my_gender = response.gender;
+				var my_username = response.username;
+				var my_facebook_id = response.id;
+				$("#my-profile-name").html(my_name);
+				$("#my-profile-gender").html(my_gender);
+				$("#my-profile-username").html(my_username);
+				$("#my-profile-facebook-id").html(my_facebook_id);
+			 	//SaveFBData(response);
+ 	  	  	  	 alert("Success ");
+ 	  	  	});
+			FB.api('/me/picture?width=100', function(response) {
+				var my_picture_url = response.data.url;
+				$("#my-profile-picture").attr('src', my_picture_url);
+			}); 	
+ 	  	 };
+	};
+</script>
+<!-- EndBlock-->
+
+</body>
+
+</html>
