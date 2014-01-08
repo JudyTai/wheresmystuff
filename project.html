@@ -290,7 +290,7 @@ $(document).ready(function() {
   	 	 $("#my-login-button").click(function(){
  	  	  	 FB.getLoginStatus(function(response){
  	  	  	 if(response.status !== 'connected'){
- 	  	  	 
+ 	  	  	 alert("FBlogin");
  	  	  	 FB.login();
  	  	  	 /*
                 FB.login(function(response){
