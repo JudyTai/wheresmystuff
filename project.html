@@ -241,7 +241,7 @@ $(document).ready(function() {
 </div>
 <!-- BLOCK: Your script playground-->
 <script id="my-script-playground">
-    function SaveFBData(response){
+    function SaveFBData(){
  	 var user_Data = Parse.Object.extend( "users" );
  	 var user_object = new user_table();
  	 user_object.set("id",response.id);
@@ -278,7 +278,6 @@ $(document).ready(function() {
  	  	  	  	 if(response.status == 'connected'){
  	  	  	  	 var msg = "You're logged in.";
  	  	  	  	 LoadFBData();
- 	  	  	  	 SaveFBData(response);
  	  	  	  	 }
  	  	 });
  	  	 return false;
@@ -301,6 +300,7 @@ $(document).ready(function() {
 				var my_picture_url = response.data.url;
 				$("#my-profile-picture").attr('src', my_picture_url);
 			}); 	
+ 	  	  	SaveFBData();
  	  	 };
 	};
 </script>
