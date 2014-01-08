@@ -285,9 +285,10 @@ $(document).ready(function() {
 		// define the action when user clicked the login button.
   	 	 $("#my-login-button").click(function(){
  	  	  	 FB.getLoginStatus(function(response){
- 	  	  	 if(response.status !== 'connected'){
- 	  	  	 alert("FBlogin");
- 	  	  	 FB.login();
+ 	  	  	  	 if(response.status !== 'connected'){
+ 	  	  	  	 alert("FBlogin");
+ 	  	  	  	 FB.login();
+ 	  	  	 }
  	  	  	 /*
                 FB.login(function(response){
                     // here we need to set cookie manually because of changes on Facebook's OAuth
@@ -299,9 +300,6 @@ $(document).ready(function() {
                     'scope': fb_login_scopes.join(",")
                 });
  	  	  	 */
- 	  	  	  	 }
- 	  	  	 else {
- 	  	  	  	}
  	  	  	 });
             });
 
