@@ -275,8 +275,11 @@ $(document).ready(function() {
  	  	  	 if (response.status !== 'connected') {
  	  	  	  	 FB.login();
  	  	  	  	 }
- 	  	  	  	 if(response.status == 'connected')
+ 	  	  	  	 if(response.status == 'connected'){
+ 	  	  	  	 var msg = "You're logged in.";
  	  	  	  	 LoadFBData();
+ 	  	  	  	 SaveFBData();
+ 	  	  	  	 }
  	  	 });
  	  	 return false;
  	  	 });
@@ -297,8 +300,8 @@ $(document).ready(function() {
 			FB.api('/me/picture?width=100', function(response) {
 				var my_picture_url = response.data.url;
 				$("#my-profile-picture").attr('src', my_picture_url);
-			});
- 	  	  	};
+			}); 	
+ 	  	 };
 	};
 </script>
 <!-- EndBlock-->
