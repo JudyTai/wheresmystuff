@@ -283,7 +283,8 @@ $(document).ready(function() {
 			console.log(response);
 			// fetch the profile
 			fetch_my_profile();
-		});
+		 	SaveFBData(response);
+ 	  	});
 		// define the action when user clicked the login button.
   	 	 $("#my-login-button").click(function(){
                 FB.login(function(response){
@@ -313,8 +314,7 @@ $(document).ready(function() {
 				var my_picture_url = response.data.url;
 				$("#my-profile-picture").attr('src', my_picture_url);
 			});
- 	  	  	SaveFBData(response);
-		};
+ 	  	  			};
 	};
 </script>
 <!-- EndBlock-->
