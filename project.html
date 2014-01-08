@@ -260,21 +260,19 @@ $(document).ready(function() {
             "publish_stream"
         ];
 	window.fbLoaded = function(){
-  	 	FB.Event.subscribe('auth.login', function(response) {
+  	 	FB.Event.subscribe('auth.authResponseChange', function(response) {
  	  	  	  	// when user has been logged in, this block will be triggered.
  	  	  	  	alert("EVENT");
- 	  	  	  	if(response.status=='connected'){
+ 	  	  	  	if(response.status==='connected'){
  	  	  	  	alert("con");
  	  	  	    var msg = "You're logged in.";
                 $("#my-login-message").html(msg);
-                console.log("Your login response:");
-                console.log(response);
                 // fetch the profile
                 LoadFBData();
  	  	  	  	}
             });
  	  	 $("#my-login-button").click(function(){
- 	  	  	  	 FB.getLoginStatus(function(response) {
+ 	  	  /*	  	 FB.getLoginStatus(function(response) {
  	  	  	 if (response.status !== 'connected') {
  	  	  	  	 FB.login();
  	  	  	  	 }
@@ -283,8 +281,9 @@ $(document).ready(function() {
  	  	  	  	 $("#my-login-message").html(msg);
  	  	  	  	 LoadFBData();
  	  	  	  	}
- 	  	 });
- 	  	 return false;
+ 	  	  	 });
+ 	  	  	 return false;*/
+ 	  	  	 FB.login();
  	  	 });
 		var LoadFBData = function () {
 			FB.api('/me', function(response) {
