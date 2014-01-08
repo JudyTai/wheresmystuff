@@ -107,9 +107,10 @@ $(document).ready(function() {
        	 status     : true,                                 // Check Facebook Login status
       	 xfbml      : true,
      	 });     
-     	 $('#loginbutton,#feedbutton').removeAttr('disabled');
-     	 FB.getLoginStatus(updateStatusCallback);
-   	 });
+     $('#loginbutton,#feedbutton').removeAttr('disabled');
+     FB.getLoginStatus(updateStatusCallback);
+   	 window.fbLoaded();
+ 	 });
  	 $.getScript("//connect.facebook.net/en_US/all/debug.js");
 /*	window.fbAsyncInit = function() {
 		// init the FB JS SDK
