@@ -26,7 +26,7 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 </head>
-
+<script src="//www.parsecdn.com/js/parse-1.1.15.min.js"></script>
 
 <script> 
   function func(form){ 
@@ -34,6 +34,45 @@
       obj.value="" ; 
   } 
 </script> 
+
+<script>
+Parse.initialize("d4Rt7UQ8PeCJcveSD95Cj3V91mxfLUPxcm0qOwGF", "sPRPHDUscBMqe5R7dSy3liO8QEtJ2KZm3sfbD9SP");
+
+function addNewItem(/*itemType*/){
+		var ItemList = Parse.Object.extend("ItemList");
+	var itemList = new ItemList();
+	var inName = document.getElementById("inName").value;
+	var inDetailedLocation = document.getElementById("inDetailedLocation").value;
+	var inDescription = document.getElementById("inDescription").value;
+	var locations=document.getElementsByClassName("checkBox");
+	var inLocation;
+	var inLocationId;
+	for (var i=0, ii=locations.length; i<ii; i++){
+		if (locations[i].checked==true){
+			inLocation=locations[i].name;
+			inLocationId=locations[i].value;
+			break;
+		}
+	} 
+	itemList.set("itemName", inName);
+	itemList.set("itemDetailedLocation", inDetailedLocation);
+	itemList.set("itemDescription", inDescription);
+	itemList.set("itemLocation", inLocation);
+	itemList.set("itemLocationId", inLocationId);
+	itemList.save(null, {
+		success: function(itemList) {
+			// Execute any logic that should take place after the object is saved.
+			alert('New object created with objectId: ' + itemList.id);
+			window.location.reload(true);
+		},
+		error: function(itemList, error) {
+			// Execute any logic that should take place if the save fails.
+			// error is a Parse.Error with an error code and description.
+			alert('Failed to create new object, with error code: ' + error.description);
+		}
+	});
+}
+</script>
 
 
 
@@ -80,69 +119,78 @@
 				<!--<img class="img-responsive" id="utemImg" src="./picture/0.jpg" width="200" height="200" alt="error">-->
 				</div>			
 				<div class="col-xs-6 col-md-6">
-					Item Name<input type="text" value="What's your Item Name" onfocus="func(this)" SIZE = 40 AutoComplete="Off" /></br>
-					Detailed area<input type="text" value="Detail Place" onfocus="func(this)" SIZE = 40 AutoComplete="Off" /></br>
+					Item Name<input type="text" id="inName" value="What's your Item Name" onfocus="func(this)" SIZE = 40 AutoComplete="Off" /></br>
+					Detailed area<input type="text" id="inDetailedLocation" value="Detail Place" onfocus="func(this)" SIZE = 40 AutoComplete="Off" /></br>
 				</div>
-					Detail</br><textarea rows=10 cols=200 value="Please Describe Your Item."></textarea></br>
+					Detail</br><textarea id="inDescription" rows=10 cols=200 value="Please Describe Your Item."></textarea></br>
 					Lost Area<br/>
 <form>
+<<<<<<< HEAD
 			<input type= checkbox value="0" name="社資中心"> 社資中心
+=======
+<input class="checkBox" type= checkbox value="0" name="社資中心"> 社資中心
+>>>>>>> 5b0d567f032cbd558cda31a86ff43fdd86424965
 
-			<input type=checkbox value="1" name="井塘樓"> 井塘樓
+			<input class="checkBox" type=checkbox value="1" name="井塘樓"> 井塘樓
 
-			<input type=checkbox value="2" name="憩賢樓"> 憩賢樓
+			<input class="checkBox" type=checkbox value="2" name="憩賢樓"> 憩賢樓
 
-			<input type=checkbox value="3" name="逸仙樓"> 逸仙樓
+			<input class="checkBox" type=checkbox value="3" name="逸仙樓"> 逸仙樓
 
-			<input type=checkbox value="4" name="學思樓"> 學思樓
+			<input class="checkBox" type=checkbox value="4" name="學思樓"> 學思樓
 
-			<input type=checkbox value="5" name="中正圖書館"> 中正圖書館
+			<input class="checkBox" type=checkbox value="5" name="中正圖書館"> 中正圖書館
 
-			<input type=checkbox value="6" name="商學院"> 商學院
+			<input class="checkBox" type=checkbox value="6" name="商學院"> 商學院
 
-			<input type=checkbox value="7" name="研究大樓"> 研究大樓
+			<input class="checkBox" type=checkbox value="7" name="研究大樓"> 研究大樓
 
-			<input type=checkbox value="8" name="四維堂"> 四維堂
+			<input class="checkBox" type=checkbox value="8" name="四維堂"> 四維堂
 
-			<input type=checkbox value="9" name="行政大樓"> 行政大樓
+			<input class="checkBox" type=checkbox value="9" name="行政大樓"> 行政大樓
 
-			<input type=checkbox value="A" name="志希樓"> 志希樓
+			<input class="checkBox" type=checkbox value="A" name="志希樓"> 志希樓
 
-			<input type=checkbox value="B" name="果夫樓"> 果夫樓
+			<input class="checkBox" type=checkbox value="B" name="果夫樓"> 果夫樓
 
-			<input type=checkbox value="C" name="樂活館"> 樂活館
+			<input class="checkBox" type=checkbox value="C" name="樂活館"> 樂活館
 
-			<input type=checkbox value="D" name="資訊大樓"> 資訊大樓
+			<input class="checkBox" type=checkbox value="D" name="資訊大樓"> 資訊大樓
 
-			<input type=checkbox value="E" name="新聞館"> 新聞館
+			<input class="checkBox" type=checkbox value="E" name="新聞館"> 新聞館
 
-			<input type=checkbox value="F" name="政大書城"> 政大書城
+			<input class="checkBox" type=checkbox value="F" name="政大書城"> 政大書城
 </br>
-			<input type=checkbox value="G" name="大智樓"> 大智樓
+			<input class="checkBox" type=checkbox value="G" name="大智樓"> 大智樓
 
-			<input type=checkbox value="H" name="大仁樓"> 大仁樓
+			<input class="checkBox" type=checkbox value="H" name="大仁樓"> 大仁樓
 
-			<input type=checkbox value="I" name="大勇樓"> 大勇樓
+			<input class="checkBox" type=checkbox value="I" name="大勇樓"> 大勇樓
 
-			<input type=checkbox value="J" name="綜合院館"> 綜合院館
+			<input class="checkBox" type=checkbox value="J" name="綜合院館"> 綜合院館
 
-			<input type=checkbox value="K" name="體育館"> 體育館
+			<input class="checkBox" type=checkbox value="K" name="體育館"> 體育館
 
-			<input type=checkbox value="L" name="傳播學院"> 傳播學院
+			<input class="checkBox" type=checkbox value="L" name="傳播學院"> 傳播學院
 
-			<input type=checkbox value="M" name="道藩樓"> 道藩樓
+			<input class="checkBox" type=checkbox value="M" name="道藩樓"> 道藩樓
 
-			<input type=checkbox value="N" name="百年樓"> 百年樓
+			<input class="checkBox" type=checkbox value="N" name="百年樓"> 百年樓
 
-			<input type=checkbox value="O" name="季陶樓"> 季陶樓
+			<input class="checkBox" type=checkbox value="O" name="季陶樓"> 季陶樓
 
-			<input type=checkbox value="P" name="國際大樓"> 國際大樓
+			<input class="checkBox" type=checkbox value="P" name="國際大樓"> 國際大樓
 
-			<input type=checkbox value="Q" name="藝文中心"> 藝文中心
+			<input class="checkBox" type=checkbox value="Q" name="藝文中心"> 藝文中心
 
 </form>
+<<<<<<< HEAD
 
 			<button align="right" type"submit"class="btn btn-default">Submit</button>
+=======
+<form align="right"><input type = reset></form>
+<button onclick="addNewItem()">submit</button>
+>>>>>>> 5b0d567f032cbd558cda31a86ff43fdd86424965
 			</div>
 		</div><!--container-->
 </div>

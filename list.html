@@ -13,9 +13,10 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="//netdna.bootstrapcdn.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="./dist/js/rowlink.js"></script>
+<script src="//www.parsecdn.com/js/parse-1.1.15.min.js"></script>
 
 <script>
-function changeList(list){
+function changeList(list, first){
 	localStorage.setItem("whichList",list);
 }
 function changeItem(item){
@@ -27,6 +28,7 @@ function changeItem(item){
 <script>
 	var whichList=localStorage.getItem("whichList");
 	var whichBuilding=localStorage.getItem("whichBuilding");
+	var tablerow=document.getElementsByClassName("clickableRow");
 	function changeContentOfBuilding(){
 		var buildingImg=document.getElementById('buildingImg');
 		var buildingTitle=document.getElementById('buildingTitle');
@@ -120,48 +122,130 @@ function changeItem(item){
 	}
 	function changeContentOfList(){
 		var list=document.getElementById('listTitle');
-		var tablerow=document.getElementById('tablerow');
+		var tablerow=document.getElementsByClassName('clickableRow');
 		var tabletitle=document.getElementById('tabletitle');
 		if (whichList!=null){
 			list.innerHTML=whichList+" item";
 			if (whichList=="Lost"){
 				tabletitle.style.backgroundColor='#F3827E';
-				tablerow.style.backgroundColor="#FDC3C1";
+				for (var i = 0, ii = tablerow.length; i < ii; i++) {
+					tablerow[i].style.backgroundColor="#FDC3C1";
+				}
 			}
 			else{
 				tabletitle.style.backgroundColor='#74AEDB';
-				tablerow.style.backgroundColor="#D0E3F3";
+				for (var i = 0, ii = tablerow.length; i < ii; i++) {
+					tablerow[i].style.backgroundColor="#D0E3F3";
+				}
 			}
 		}
 	}
-	function hoverColor(isIn){
-		var tablerow=document.getElementById('tablerow');
+/*	function hoverColor(isIn){
+		//var tablerow=document.getElementsByName('tablerow');
 		if (whichList=="Lost"){
-			tablerow.style.backgroundColor=isIn?"#F2B1AF":"#FDC3C1";
+			this.style.backgroundColor=isIn?"#F2B1AF":"#FDC3C1";	
 		}
 		else{
-			tablerow.style.backgroundColor=isIn?"#A0C9E8":"#D0E3F3";
+			this.style.backgroundColor=isIn?"#A0C9E8":"#D0E3F3";
 		}
 	}
+*/
 </script>
 
 <script type="text/javascript">
 $(document).ready(function() {
 	/*Default: lost list*/
-	changeList("Lost");
-
 	$(".clickableRow").click(function() {
 		window.document.location = $(this).attr("href");
       	});
+	$(".clickableRow").mouseover(function() {
+		var whichList=localStorage.getItem("whichList");
+		if (whichList=="Lost"){
+			$(this).css("backgroundColor", "#F2B1AF");
+		}
+		else if (whichList=="Found"){
+			$(this).css("backgroundColor", "#A0C9E8");
+		}
+	});
+	$(".clickableRow").mouseout(function() {
+		var whichList=localStorage.getItem("whichList");
+		if (whichList=="Lost"){
+			$(this).css("backgroundColor", "#FDC3C1");
+		}
+		else if (whichList=="Found"){
+			$(this).css("backgroundColor", "#D0E3F3");
+		}
+	});
+
 });
 </script>
-<body onload="changeContentOfBuilding(); changeContentOfList()">
+<script type="text/javascript">
+Parse.initialize("d4Rt7UQ8PeCJcveSD95Cj3V91mxfLUPxcm0qOwGF", "sPRPHDUscBMqe5R7dSy3liO8QEtJ2KZm3sfbD9SP");
+	function addRow(tableID, itemName, itemLocationId, itemLocation) {
+		var table = document.getElementById(tableID);
+		var rowCount = table.rows.length;
+		var row = table.insertRow(rowCount);
+		row.className="clickableRow";
+		/*row.setAttribute("name","tablerow");
+		row.setAttribute("href","./item.html");*/
+		//row.innerHTML="<href='./item.html'>"
+		row.style="cursor:pointer";
+		row.onclick=changeItem(itemName);
+		
+		var cell1 = row.insertCell(0);
+		cell1.innerHTML = rowCount;
+
+		var cell2 = row.insertCell(1);
+		cell2.innerHTML = itemName;
+		
+		var cell3 = row.insertCell(2);
+		cell3.innerHTML = itemLocation;
+	}
+	function loadItems(){
+		var ItemList = Parse.Object.extend("ItemList");
+		var query = new Parse.Query(ItemList);
+		query.find({
+			success: function(results) {
+				//alert("Successfully retrieved " + results.length + " items.");
+				// Do something with the returned Parse.Object values
+				for (var i = 0; i < results.length; i++) { 
+					var object = results[i];
+					addRow("customTable", object.get('itemName'), object.get('itemLocationId'), object.get('itemLocation'));
+					//alert(object.id + ' - ' + object.get('itemName'));
+				}
+			},
+			error: function(error) {
+				alert("Error: " + error.code + " " + error.message);
+			}
+		});
+	}
+/*	function deleteRow(tableID) {
+		try {
+			var table = document.getElementById(tableID);
+			var rowCount = table.rows.length;
+			for(var i=0; i<rowCount; i++) {
+				var row = table.rows[i];
+				var chkbox = row.cells[0].childNodes[0];
+				if(null != chkbox && true == chkbox.checked) {
+					table.deleteRow(i);
+					rowCount--;
+					i--;
+				}
+			}
+		}catch(e) {
+			alert(e);
+		}
+	}
+*/
+</script>
+
+<body onload="changeContentOfBuilding(); changeContentOfList(); loadItems()">
 <div class="panel panel-default">
         <!-- Default panel contents -->
         <div class="panel-heading">
 		<div class="btn-group pull-right">
-        		<button type="button" class="btn btn btn-danger" id="refresh" onclick= "changeList('Lost'); window.location.reload(true)">Lost</button>
-        		<button type="button" class="btn btn btn-primary" id="refresh" onclick= "changeList('Found'); window.location.reload(true)" >Found</button>
+        		<button type="button" class="btn btn btn-danger" id="refresh" onclick= "window.location.reload(true); changeList('Lost')">Lost</button>
+        		<button type="button" class="btn btn btn-primary" id="refresh" onclick= "window.location.reload(true); changeList('Found')" >Found</button>
 		</div>
 		<h2 id="buildingTitle"></h2>
 		<img id="buildingImg" width="100" height="100" alt="error"/>
@@ -177,17 +261,17 @@ $(document).ready(function() {
                 </thead>
 
                 <tbody>
-                        <tr class="clickableRow" id="tablerow" href="./item.html" style="cursor:pointer" onmouseover="hoverColor(true)" onmouseout="hoverColor(false)" onclick="changeItem('Bottle')">
+                        <tr class="clickableRow" href="./item.html" style="cursor:pointer" onclick="changeItem('Bottle')">
                                 <td>1</td>
                                 <td>Bottle</td>
                                 <td>101</td>
                         </tr>
-                        <tr class="clickableRow" id="tablerow" href="./item.html" style="cursor:pointer" onmouseover="hoverColor(true)" onmouseout="hoverColor(false)" onclick="changeItem('Cellphone')">
+                        <tr class="clickableRow" href="./item.html" style="cursor:pointer" onclick="changeItem('Cellphone')">
                                 <td>2</td>
                                 <td>Cell phone</td>
                                 <td>3F</td>
                         </tr>
-                        <tr class="clickableRow" id="tablerow" href="./item.html" style="cursor:pointer">
+                        <tr class="clickableRow" href="./item.html" style="cursor:pointer" onclick="changeItem('Watch')">
                                 <td>3</td>
                                 <td>Watch</td>
                                 <td>2F hallway</td>
