@@ -27,6 +27,48 @@
 <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 <![endif]-->
 </head>
+<script src="https://www.parsecdn.com/js/parse-1.1.15.min.js"></script>
+<script>
+Parse.initialize("d4Rt7UQ8PeCJcveSD95Cj3V91mxfLUPxcm0qOwGF", "sPRPHDUscBMqe5R7dSy3liO8QEtJ2KZm3sfbD9SP");
+
+function addNewItem(/*response, itemType*/){
+    var ItemList = Parse.Object.extend("ItemList");
+    var itemList = new ItemList();
+    var inName = document.getElementById("inName").value;
+    var inDetailedLocation = document.getElementById("inDetailedLocation").value;
+    var inDescription = document.getElementById("inDescription").value;
+    var locations=document.getElementsByClassName("checkBox");
+    var inLocation;
+    var inLocationId;
+    for (var i=0, ii=locations.length; i<ii; i++){
+        if (locations[i].checked==true){
+            inLocation=locations[i].name;
+            inLocationId=locations[i].value;
+            break;
+        }
+    } 
+    itemList.set("itemName", inName);
+    itemList.set("itemDetailedLocation", inDetailedLocation);
+    itemList.set("itemDescription", inDescription);
+    itemList.set("itemLocation", inLocation);
+    itemList.set("itemLocationId", inLocationId);
+    itemList.set("nowUserName", localStorage.getItem("nowUserName"));
+    itemList.set("nowUserId", localStorage.getItem("nowUserId"));
+    itemList.save(null, {
+        success: function(itemList) {
+            // Execute any logic that should take place after the object is saved.
+            alert('New object created with objectId: ' + itemList.id);
+            window.location.reload(true);
+        },
+        error: function(itemList, error) {
+            // Execute any logic that should take place if the save fails.
+            // error is a Parse.Error with an error code and description.
+            alert('Failed to create new object, with error code: ' + error.description);
+        }
+    })
+}
+</script>
+
 
 <body>
 <div id="wrap">
@@ -86,7 +128,7 @@
 								<div class="form-group">
   							    <label class="col-sm-2 control-label">Name</label>
     							<div class="col-xs-8">
-      							<input type="text" class="form-control pull-left" id="inputName" placeholder="What's your Item Name">
+      							<input type="text" class="form-control pull-left" id="inName" placeholder="What's your Item Name">
     							</div>
   								</div>
 								<br><br>
@@ -119,98 +161,98 @@
 								</form>
 								<br>
       							<label class="checkbox-inline">
-  									<input type=checkbox id="inlineCheckbox1" value="0" name="社資中心"> 社資中心
+  								<input type=checkbox class="checkBox" id="inlineCheckbox1" value="0" name="社資中心"> 社資中心
 								</label>
 								<label class="checkbox-inline">
-  									<input type=checkbox id="inlineCheckbox2" value="1" name="井塘樓"> 井塘樓
+  								<input type=checkbox class="checkBox" id="inlineCheckbox2" value="1" name="井塘樓"> 井塘樓
 								</label>
 								<label class="checkbox-inline">	
-									<input type=checkbox id="inlineCheckbox3" value="2" name="憩賢樓"> 憩賢樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox3" value="2" name="憩賢樓"> 憩賢樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox4" value="3" name="逸仙樓"> 逸仙樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox4" value="3" name="逸仙樓"> 逸仙樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox5" value="4" name="學思樓"> 學思樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox5" value="4" name="學思樓"> 學思樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox6" value="5" name="中正圖書館"> 中正圖書館
+								<input type=checkbox class="checkBox" id="inlineCheckbox6" value="5" name="中正圖書館"> 中正圖書館
 								</label>
 								<br>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox7" value="6" name="商學院"> 商學院
+								<input type=checkbox class="checkBox" id="inlineCheckbox7" value="6" name="商學院"> 商學院
 								</label>
 								<label class="checkbox-inline">	
-									<input type=checkbox id="inlineCheckbox8" value="7" name="研究大樓"> 研究大樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox8" value="7" name="研究大樓"> 研究大樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox9" value="8" name="四維堂"> 四維堂
+								<input type=checkbox class="checkBox" id="inlineCheckbox9" value="8" name="四維堂"> 四維堂
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox10" value="9" name="行政大樓"> 行政大樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox10" value="9" name="行政大樓"> 行政大樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox11" value="A" name="志希樓"> 志希樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox11" value="A" name="志希樓"> 志希樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox12" value="B" name="果夫樓"> 果夫樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox12" value="B" name="果夫樓"> 果夫樓
 								</label>
 								<br>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox13" value="C" name="樂活館"> 樂活館
+								<input type=checkbox class="checkBox" id="inlineCheckbox13" value="C" name="樂活館"> 樂活館
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox14" value="D" name="資訊大樓"> 資訊大樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox14" value="D" name="資訊大樓"> 資訊大樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox15" value="E" name="新聞館"> 新聞館
+								<input type=checkbox class="checkBox" id="inlineCheckbox15" value="E" name="新聞館"> 新聞館
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox16" value="F" name="政大書城"> 政大書城
+								<input type=checkbox class="checkBox" id="inlineCheckbox16" value="F" name="政大書城"> 政大書城
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox17" value="G" name="大智樓"> 大智樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox17" value="G" name="大智樓"> 大智樓
 								</label>
 								<label class="checkbox-inline">	
-									<input type=checkbox id="inlineCheckbox18" value="H" name="大仁樓"> 大仁樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox18" value="H" name="大仁樓"> 大仁樓
 								</label>
 								<br>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox19" value="I" name="大勇樓"> 大勇樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox19" value="I" name="大勇樓"> 大勇樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox20" value="J" name="綜合院館"> 綜合院館
+								<input type=checkbox class="checkBox" id="inlineCheckbox20" value="J" name="綜合院館"> 綜合院館
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox21" value="K" name="體育館"> 體育館
+								<input type=checkbox class="checkBox" id="inlineCheckbox21" value="K" name="體育館"> 體育館
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox22" value="L" name="傳播學院"> 傳播學院
+								<input type=checkbox class="checkBox" id="inlineCheckbox22" value="L" name="傳播學院"> 傳播學院
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox23" value="M" name="道藩樓"> 道藩樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox23" value="M" name="道藩樓"> 道藩樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox24" value="N" name="百年樓"> 百年樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox24" value="N" name="百年樓"> 百年樓
 								</label>
 								<br>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox25" value="O" name="季陶樓"> 季陶樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox25" value="O" name="季陶樓"> 季陶樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox26" value="P" name="國際大樓"> 國際大樓
+								<input type=checkbox class="checkBox" id="inlineCheckbox26" value="P" name="國際大樓"> 國際大樓
 								</label>
 								<label class="checkbox-inline">
-									<input type=checkbox id="inlineCheckbox27" value="Q" name="藝文中心"> 藝文中心
+								<input type=checkbox class="checkBox" id="inlineCheckbox27" value="Q" name="藝文中心"> 藝文中心
 								</label>
 								<br>
 								<hr>
 								<span class="help-block">Please write down the detail.</span>
-								<textarea class="form-control" rows="3"></textarea>
+								<textarea class="form-control" id="inDescription" rows="3"></textarea>
 								<br>
 								<div class="input-group">
  								 <span class="input-group-addon">Detail Area</span>
- 								 <input type="text" class="form-control" placeholder="Where did you lost it">
+ 								 <input type="text" id="inDetailedLocation" class="form-control" placeholder="Where did you lost it">
 								</div>
 								<br>
 								<div class="form-group">
@@ -222,7 +264,7 @@
 							</div>
       						<div class="modal-footer">
         					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        					<button type="button" class="btn btn-primary">Submit</button>
+        					<button type="button" class="btn btn-primary" onclick="addNewItem()">Submit</button>
       						</div>
     					</div><!-- /.modal-content -->
   					</div><!-- /.modal-dialog -->
@@ -231,7 +273,7 @@
 				<div class="col-sm-8">
 					<div class="panel panel-default">
 						<div class="panel-heading">
-							<h3 class="panel-title">Found List</h3>
+							<h3 class="panel-title">Lost List</h3>
 						</div>
 						<div class="panel-body">
 							<p>something to say</p>
