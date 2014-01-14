@@ -124,7 +124,7 @@ function changeItem(item){
 		var list=document.getElementById('listTitle');
 		var tablerow=document.getElementsByClassName('clickableRow');
 		var tabletitle=document.getElementById('tabletitle');
-		if (whichList!=null){
+		if (whichList!=null && tablerow!=null){
 			list.innerHTML=whichList+" item";
 			if (whichList=="Lost"){
 				tabletitle.style.backgroundColor='#F3827E';
@@ -140,25 +140,16 @@ function changeItem(item){
 			}
 		}
 	}
-/*	function hoverColor(isIn){
-		//var tablerow=document.getElementsByName('tablerow');
-		if (whichList=="Lost"){
-			this.style.backgroundColor=isIn?"#F2B1AF":"#FDC3C1";	
-		}
-		else{
-			this.style.backgroundColor=isIn?"#A0C9E8":"#D0E3F3";
-		}
-	}
-*/
 </script>
 
+
 <script type="text/javascript">
-$(document).ready(function() {
+$(window).load(function() {
 	/*Default: lost list*/
-	$(".clickableRow").click(function() {
+	$('tbody').on('click', 'tr', function(){
 		window.document.location = $(this).attr("href");
       	});
-	$(".clickableRow").mouseover(function() {
+	$('tbody').on('mouseover', 'tr', function() {
 		var whichList=localStorage.getItem("whichList");
 		if (whichList=="Lost"){
 			$(this).css("backgroundColor", "#F2B1AF");
@@ -167,7 +158,7 @@ $(document).ready(function() {
 			$(this).css("backgroundColor", "#A0C9E8");
 		}
 	});
-	$(".clickableRow").mouseout(function() {
+	$('tbody').on('mouseout', 'tr', function() {
 		var whichList=localStorage.getItem("whichList");
 		if (whichList=="Lost"){
 			$(this).css("backgroundColor", "#FDC3C1");
@@ -177,40 +168,49 @@ $(document).ready(function() {
 		}
 	});
 
+
 });
 </script>
 <script type="text/javascript">
 Parse.initialize("d4Rt7UQ8PeCJcveSD95Cj3V91mxfLUPxcm0qOwGF", "sPRPHDUscBMqe5R7dSy3liO8QEtJ2KZm3sfbD9SP");
-	function addRow(tableID, itemName, itemLocationId, itemLocation) {
-		var table = document.getElementById(tableID);
+	function addRow(nowUserName, itemName, itemLocationId, itemDetailedLocation) {
+		var whichList=localStorage.getItem("whichList");
+		var table = document.getElementsByTagName('tbody')[0];
 		var rowCount = table.rows.length;
 		var row = table.insertRow(rowCount);
 		row.className="clickableRow";
-		/*row.setAttribute("name","tablerow");
-		row.setAttribute("href","./item.html");*/
-		//row.innerHTML="<href='./item.html'>"
-		row.style="cursor:pointer";
-		row.onclick=changeItem(itemName);
+		row.setAttribute("href","./item.html");
+		row.setAttribute("onclick","changeItem('" + itemName + "')");
+		if (whichList=="Lost")
+			row.setAttribute("style","cursor:pointer; background-color:#FDC3C1");
+		else if (whichList=="Found")
+			row.setAttribute("style","cursor:pointer; background-color:#D0E3F3");
 		
 		var cell1 = row.insertCell(0);
-		cell1.innerHTML = rowCount;
+ 	  	cell1.innerHTML = rowCount+1;
 
 		var cell2 = row.insertCell(1);
-		cell2.innerHTML = itemName;
-		
+		cell2.innerHTML = nowUserName;
+
 		var cell3 = row.insertCell(2);
-		cell3.innerHTML = itemLocation;
+		cell3.innerHTML = itemName;
+
+		var cell4 = row.insertCell(3);
+		cell4.innerHTML = itemDetailedLocation;
+		
 	}
 	function loadItems(){
+		var whichBuilding=localStorage.getItem("whichBuilding");
 		var ItemList = Parse.Object.extend("ItemList");
 		var query = new Parse.Query(ItemList);
+		query.equalTo("itemLocationId",whichBuilding);
 		query.find({
 			success: function(results) {
 				//alert("Successfully retrieved " + results.length + " items.");
 				// Do something with the returned Parse.Object values
 				for (var i = 0; i < results.length; i++) { 
 					var object = results[i];
-					addRow("customTable", object.get('itemName'), object.get('itemLocationId'), object.get('itemLocation'));
+					addRow(object.get('nowUserName'), object.get('itemName'), object.get('itemLocationId'), object.get('itemDetailedLocation'));
 					//alert(object.id + ' - ' + object.get('itemName'));
 				}
 			},
@@ -255,27 +255,33 @@ Parse.initialize("d4Rt7UQ8PeCJcveSD95Cj3V91mxfLUPxcm0qOwGF", "sPRPHDUscBMqe5R7dS
                 <thead>
                         <tr id="tabletitle">
                                 <th>#</th>
+				<th>Owner</th>
                                 <th id="listTitle">Lost item</th>
                                 <th>Specific spot</th>
                         </tr>
                 </thead>
 
                 <tbody>
+			<!--
                         <tr class="clickableRow" href="./item.html" style="cursor:pointer" onclick="changeItem('Bottle')">
                                 <td>1</td>
+				<td>Some User</d>
                                 <td>Bottle</td>
                                 <td>101</td>
                         </tr>
                         <tr class="clickableRow" href="./item.html" style="cursor:pointer" onclick="changeItem('Cellphone')">
                                 <td>2</td>
+				<td>Some User</td>
                                 <td>Cell phone</td>
                                 <td>3F</td>
                         </tr>
                         <tr class="clickableRow" href="./item.html" style="cursor:pointer" onclick="changeItem('Watch')">
                                 <td>3</td>
+				<td>Some User</td>
                                 <td>Watch</td>
                                 <td>2F hallway</td>
                         </tr>
+			-->
                 </tbody>
         </table>
 </div>

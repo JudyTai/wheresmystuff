@@ -9,7 +9,7 @@
 <link rel="shortcut icon" href="bootstrap/docs-assets/ico/favicon.png">
 
 <title>The profile page</title>
-
+<script src="./heroku.js"></script>
 <!-- Bootstrap core CSS -->
 <link href="./dist/css/bootstrap.css" rel="stylesheet">
 <!-- Bootstrap theme -->
@@ -111,43 +111,45 @@
 		</div><!--container-->
 </div>
 <script id="my-script-playground">
- 	 function set_cookie(k, v) {
-            document.cookie = k + "=" + v;
-        }
-    fb_login_scopes = [
-            "read_stream",
-            "read_friendlists",
-            "publish_stream"
-        ];
-    window.fbLoaded = function(){
-        FB.Event.subscribe('auth.authResponseChange', function(response) {
-            if(response.status==='connected'){
-                var msg = "You're logged in.";
-                $("#my-login-message").html(msg);
-                // fetch the profile
-                LoadFBData();
-                }
-            });
-         $("#my-login-button").click(function(){
-             FB.login();
-         });
- 	  	 var LoadFBData = function () {
-            FB.api('/me', function(response) {
-                var my_name = response.name;
-                var my_gender = response.gender;
-                var my_username = response.username;
-                var my_facebook_id = response.id;
-                $("#my-profile-name").html(my_name);
-                $("#my-profile-gender").html(my_gender);
-                $("#my-profile-username").html(my_username);
-                $("#my-profile-facebook-id").html(my_facebook_id);
-            });
-            FB.api('/me/picture?width=100', function(response) {
-                var my_picture_url = response.data.url;
-                $("#my-profile-picture").attr('src', my_picture_url);
-            });     
-         };
-    };
+	function set_cookie(k, v) {
+		document.cookie = k + "=" + v;
+	}	
+	fb_login_scopes = [
+		"read_stream",
+		"read_friendlists",
+		"publish_stream"
+	];
+	window.fbLoaded = function(){
+		FB.Event.subscribe('auth.authResponseChange', function(response) {
+			if(response.status==='connected'){
+				var msg = "You're logged in.";
+				$("#my-login-message").html(msg);
+				// fetch the profile
+				window.location.reload(true); 
+				changeList('Lost');
+				LoadFBData();
+			}
+		});
+		$("#my-login-button").click(function(){
+			FB.login();
+		});
+		var LoadFBData = function () {
+			FB.api('/me', function(response) {
+				var my_name = response.name;
+				var my_gender = response.gender;
+				var my_username = response.username;
+				var my_facebook_id = response.id;
+				$("#my-profile-name").html(my_name);
+				$("#my-profile-gender").html(my_gender);
+				$("#my-profile-username").html(my_username);
+				$("#my-profile-facebook-id").html(my_facebook_id);
+			});
+			FB.api('/me/picture?width=100', function(response) {
+				var my_picture_url = response.data.url;
+				$("#my-profile-picture").attr('src', my_picture_url);
+			});     
+		};
+	};
 </script>
 <!-- Bootstrap core JavaScript
 ================================================== -->
