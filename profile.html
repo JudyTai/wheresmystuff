@@ -73,12 +73,12 @@
 					<li class="active"><a href="profile.html">Profile</a></li>
 				</ul>
 			</div>
-			<div class="navbar-collapse collapse">
+			<!--div class="navbar-collapse collapse">
 				<form class="navbar-form navbar-right" role="form">
 					<button  id="my-login-button" class="btn btn-primary">Login with Facebook</button>
 					<a id="my-login-message"></a>
 				</form>
-			</div>
+			</div-->
 		</div> 
 	</div>
 		<div class="container">
@@ -88,6 +88,7 @@
 			</div> 
 			<div class="well">
 				<h1>Welcome "the user name"</h1>
+				<h1 id="my-profile-name"></h1>
 			</div>
 			<div class="row">
 				<div class="col-sm-4">
@@ -102,8 +103,12 @@
 							<h3 class="panel-title">The user name</h3>
 						</div>
 						<div class="panel-body">
-							<p>abc@ghost.cs.nccu.edu.tw</p>
-							<p>jeojow</p>
+							<img id="my-profile-picture" class="img-thumbnail" src="" alt="">
+                        	<dl>
+                             <dd id="my-profile-name"></dd>
+                             <dd id="my-profile-gender"></dd>
+                             <dd id="my-profile-username"></dd>
+                         	</dl>	
 						</div>
 					</div><!-- panel panel-default-->
 				</div><!-- col-sm-4-->
